@@ -1,14 +1,13 @@
-import { Button, FlatList, StyleSheet, Text, View } from "react-native";
+import { Button, Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
 import React, { useContext, useState } from "react";
-
+import { MyClassesContext } from '../../context/MyClassesContext';
 import ClassItem from "./ClassItem";
 import DeleteModal from "./DeleteModal";
-import { MyClassesContext } from '../../context/MyClassesContext';
-import { Comfortaa_700Bold } from "@expo-google-fonts/comfortaa";
+import FONTS from "../../constants/Fonts";
 
 const MyClasses = ({ navigation }) => {
 
-  const { myClassList, addClass, deleteClass } = useContext(MyClassesContext);
+  const { myClassList, deleteClass } = useContext(MyClassesContext);
 
   const [itemSelected, setItemSelected] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
@@ -28,9 +27,10 @@ const MyClasses = ({ navigation }) => {
     <View>
       <Button
         title="Agregar clases"
-        onPress={() => { 
-          navigation.navigate('GetClasses') 
-          }} />
+        onPress={() => {
+          navigation.navigate("GetClasses");
+        }}
+      />
 
       <Text style={styles.title}>Mis próximas clases</Text>
 
@@ -38,19 +38,25 @@ const MyClasses = ({ navigation }) => {
         {myClassList.length === 0 ? (
           <Text style={styles.emptyList}>No has agregado clases</Text>
         ) : (
-          <FlatList
-            contentContainerStyle={styles.listContainer}
-            data={myClassList}
-            keyExtractor={(item) => item.key}
-            renderItem={(itemData) => {
-              return (
-                <ClassItem
-                  itemData={itemData}
-                  onHandlerModal={onHandlerModal}
-                />
-              );
-            }}
-          />
+
+
+          <View style={styles.listContainer}>
+            <FlatList
+              contentContainerStyle={styles.contentContainer}
+              data={myClassList}
+              keyExtractor={(item) => item.key}
+              renderItem={(itemData) => {
+                return (
+                  <ClassItem
+                    itemData={itemData}
+                    onHandlerModal={onHandlerModal}
+                  />
+                );
+              }}
+            />
+          </View>
+
+
         )}
       </View>
 
@@ -80,11 +86,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 25,
     textAlign: "center",
-    fontFamily: 'Comfortaa_700Bold',
+    fontFamily: FONTS.comfortaaBold,
   },
 
   listContainer: {
-    width: 350,
-    alignItems: "center",
+    width: '90%',
   },
+
+  contentContainer:{
+    alignItems: 'center'
+  }
 });

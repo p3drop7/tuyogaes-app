@@ -1,41 +1,42 @@
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native'
-
-import COLORS from '../../constants/Colors'
 import React from 'react'
+import COLORS from '../../constants/Colors';
 import FONTS from '../../constants/Fonts';
 
-const DeleteModal = ({deleteItem, modalVisible, onHandlerModal}) => {
+const AddModal = ({addModalVisible, itemAdd, addClassModal, addModalHandler}) => {
   return (
-		<Modal animationType="slide" visible={modalVisible}>
-			<View style={styles.modalContainer1}>
-				<View style={styles.modalContainer2}>
-					<Text style={styles.modalText}>¿Deseas cancelar esta clase?</Text>
+    <Modal animationType="slide" visible={addModalVisible}>
+      <View style={styles.modalContainer1}>
+        <View style={styles.modalContainer2}>
+          <Text style={styles.modalText}>¿Deseas agregar esta clase?</Text>
 
-					<Pressable style={styles.cancelPressable}
-						onPress={() => {
-							deleteItem();
-						}}
-					>
-						<Text style={styles.modalCancelPressableText} >Cancelar</Text>
-					</Pressable>
+          <Pressable
+            style={styles.cancelPressable}
+            onPress={() => {
+                addClassModal(itemAdd);
+            }}
+          >
+            <Text style={styles.modalCancelPressableText}>Agregar</Text>
+          </Pressable>
 
-					<Pressable style={styles.returnPressable}
-						onPress={() => {
-							onHandlerModal();
-						}}
-					>
-						<Text style={styles.modalReturnPressableText}>Salir</Text>
-					</Pressable>
-				</View>
-			</View>
-		</Modal>
-	);
+          <Pressable
+            style={styles.returnPressable}
+            onPress={() => {
+                addModalHandler();
+            }}
+          >
+            <Text style={styles.modalReturnPressableText}>Salir</Text>
+          </Pressable>
+        </View>
+      </View>
+    </Modal>
+  );
 }
 
-export default DeleteModal
+export default AddModal
 
 const styles = StyleSheet.create({
-	modalContainer1: {
+    modalContainer1: {
 		flex: 1,
 		width: '100%',
 		justifyContent: 'center',
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
 	modalCancelPressableText: {
 		color: 'white',
 		fontSize: 20,
-		fontFamily: FONTS.comfortaaBold,
+		fontFamily: FONTS.comfortaaBold
 	},
 
 	returnPressable: {

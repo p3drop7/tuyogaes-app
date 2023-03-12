@@ -16,6 +16,7 @@ export default Dashboard
 
 const styles = StyleSheet.create({
   screen: {
+    flex: 1,
     width: Dimensions.get('screen').width,
     height: Dimensions.get('screen').height,
   }

@@ -3,6 +3,7 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import COLORS from "../../constants/Colors";
 import React from "react";
 import ShadowBox from "../../wrappers/ShadowBox";
+import FONTS from "../../constants/Fonts";
 
 const ClassItem = ({ itemData, onHandlerModal }) => {
 
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
   },
 
   itemText: {
-    fontFamily: "comfortaa-bold",
+    fontFamily: FONTS.comfortaaBold,
     fontSize: 20,
   },
 
@@ -72,6 +73,6 @@ const styles = StyleSheet.create({
 
   cancelButtonText: {
     color: "white",
-    fontFamily: "comfortaa-bold",
+    fontFamily: FONTS.comfortaaBold,
   },
 });

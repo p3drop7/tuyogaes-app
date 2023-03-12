@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ClassContext = React.createContext()
+export const ClassesContext = React.createContext()
 
 const ClassesContextProvider =({children})=> {
 
@@ -54,9 +54,9 @@ const ClassesContextProvider =({children})=> {
   }, [fetched])
   
   return (
-    <ClassContext.Provider value={classes}>
+    <ClassesContext.Provider value={classes}>
       {children}
-    </ClassContext.Provider>
+    </ClassesContext.Provider>
   );
 }
 

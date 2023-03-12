@@ -1,6 +1,7 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import COLORS from '../../constants/Colors'
+import FONTS from '../../constants/Fonts';
 
 const ProfileDisplay = () => {
   return (
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     },
 
     name: {
-      fontFamily: 'Comfortaa_700Bold',
+      fontFamily: FONTS.comfortaaBold,
       fontSize: 25
     },
 
@@ -62,10 +63,10 @@ const styles = StyleSheet.create({
       height: 80,
       width: 80,
       backgroundColor: 'white',
-      borderStyle: 'solid',
       borderWidth: 4,
       borderColor: COLORS.darkGreen,
       borderRadius: 100,
+      alignItems: 'center',
       alignSelf: 'center',
       position: 'relative',
       top: -50

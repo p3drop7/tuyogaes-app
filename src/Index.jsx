@@ -51,6 +51,6 @@ export default Index;
 
 const styles = StyleSheet.create({
   safeAreaContainer: {
-    flex: 1,
+    flex: 1
   }
 });

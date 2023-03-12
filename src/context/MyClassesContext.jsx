@@ -6,19 +6,18 @@ const MyClassesContextProvider = ({ children }) => {
   const [myClassList, setMyClassList] = React.useState([]);
 
   const addClass = (selectedClass) => {
-    setMyClassList([...myClassList, selectedClass]);
+    if( !myClassList.some( item => item.key === selectedClass.key)) {
+      setMyClassList([...myClassList, selectedClass]);
+    }
   };
-
+  
   const deleteClass = (selectedClass) => {
-    const newClassArray = myClassList.filter(
-      (item) => item.key === !selectedClass.key
+    setMyClassList(
+      myClassList.filter((item) => {
+        return item.key !== selectedClass.key;
+      })
     );
-    setMyClassList(newClassArray);
   };
-
-  React.useEffect(() => {
-    console.log(myClassList);
-  }, [myClassList]);
 
   return (
     <MyClassesContext.Provider
