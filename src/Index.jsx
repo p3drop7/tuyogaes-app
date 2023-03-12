@@ -1,26 +1,30 @@
 import { Keyboard, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import React from "react";
 import * as SplashScreen from 'expo-splash-screen';
-import {useFonts, OpenSans_400Regular, OpenSans_700Bold} from '@expo-google-fonts/open-sans';
+import { useFonts, Comfortaa_700Bold, Comfortaa_300Light, Comfortaa_400Regular, Comfortaa_600SemiBold, Comfortaa_500Medium } from '@expo-google-fonts/comfortaa';
 import MainNavigator from "./navigators/MainNavigator";
 import { SafeAreaView } from "react-native-safe-area-context";
+import MyClassesContextProvider from "./context/MyClassesContext";
+import ClassesContextProvider from "./context/ClassesContext";
 
 SplashScreen.preventAutoHideAsync();
 
 const Index = () => {
-
   const [fontsLoaded] = useFonts({
-    OpenSans_400Regular,
-    OpenSans_700Bold
+    Comfortaa_300Light,
+    Comfortaa_400Regular,
+    Comfortaa_500Medium,
+    Comfortaa_600SemiBold,
+    Comfortaa_700Bold,
   });
 
-  React.useEffect(() =>{
-    if(fontsLoaded){
+  React.useEffect(() => {
+    if (fontsLoaded) {
       SplashScreen.hideAsync();
     }
-  }, [fontsLoaded])
+  }, [fontsLoaded]);
 
-  if(!fontsLoaded){
+  if (!fontsLoaded) {
     return null;
   }
 
@@ -31,7 +35,13 @@ const Index = () => {
           Keyboard.dismiss();
         }}
       >
-        <MainNavigator />
+
+        <ClassesContextProvider>
+          <MyClassesContextProvider>
+            <MainNavigator />
+          </MyClassesContextProvider>
+        </ClassesContextProvider>
+        
       </TouchableWithoutFeedback>
     </SafeAreaView>
   );
