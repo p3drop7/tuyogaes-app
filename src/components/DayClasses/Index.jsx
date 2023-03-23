@@ -1,12 +1,14 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import FONTS from "../../constants/Fonts";
 import { MyClassesContext } from "../../context/MyClassesContext";
+import FONTS from "../../constants/Fonts";
+import DayClassItem from "./DayClassItem";
 import AddModal from "./AddModal";
-import DailyClassItem from "./DailyClassItem";
 
-const DailyClasses = ({ daySelected, goBack }) => {
-
+const DayClasses = ({ route }) => {
+  
+  const { daySelected } = route.params
+  
   const { addClass } = React.useContext(MyClassesContext);
 
   const [itemAdd, setItemAdd] = React.useState({});
@@ -23,13 +25,18 @@ const DailyClasses = ({ daySelected, goBack }) => {
     setAddModalVisible(!addModalVisible)
   }
 
+  const goBack =()=>{
+    setItemAdd({})
+    setAddModalVisible(!addModalVisible)
+  }
 
   const month = daySelected[0].monthName;
   const day = daySelected[0].day;
 
   return (
-    <View style={styles.dailyClassesContainer}>
+    <View style={styles.dayClassesContainer}>
       <View style={styles.dateContainer1}>
+        
         <Pressable
           style={styles.goBackPressable}
           onPress={() => {
@@ -38,6 +45,7 @@ const DailyClasses = ({ daySelected, goBack }) => {
         >
           <Text style={styles.goBackText}>Volver </Text>
         </Pressable>
+
         <View style={styles.dateContainer2}>
           <Text style={styles.dateText}>{month}</Text>
           <Text style={styles.dateText}> {day}</Text>
@@ -49,7 +57,7 @@ const DailyClasses = ({ daySelected, goBack }) => {
       <View style={styles.classItemsContainer}>
         {daySelected.map((item) => {
           return (
-            <DailyClassItem
+            <DayClassItem
               classItem={item}
               addModalHandler={addModalHandler}
               key={item.key}
@@ -68,10 +76,10 @@ const DailyClasses = ({ daySelected, goBack }) => {
   );
 };
 
-export default DailyClasses;
+export default DayClasses;
 
 const styles = StyleSheet.create({
-  dailyClassesContainer: {
+  dayClassesContainer: {
     width: "100%",
     marginTop: 10,
     alignItems: "center",

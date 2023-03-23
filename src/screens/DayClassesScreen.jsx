@@ -1,18 +1,18 @@
-import { Dimensions, StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Dimensions } from 'react-native'
 import React from 'react'
 import ProfileDisplay from '../components/ProfileDisplay/ProfileDisplay'
-import MyClasses from '../components/MyClasses/Index'
+import DayClasses from '../components/DayClasses/Index'
 
-const Dashboard = ({navigation}) => {
+const DayClassesScreen = ({route, navigation}) => {
   return (
     <View style={styles.screen}>
       <ProfileDisplay />
-      <MyClasses navigation={navigation} />
+      <DayClasses navigation={navigation} route={route}/>
     </View>
   )
 }
 
-export default Dashboard
+export default DayClassesScreen
 
 const styles = StyleSheet.create({
   screen: {

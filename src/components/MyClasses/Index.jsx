@@ -1,12 +1,11 @@
-import { Button, Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
+import { Button, FlatList, StyleSheet, Text, View } from "react-native";
 import React, { useContext, useState } from "react";
-import { MyClassesContext } from '../../context/MyClassesContext';
+import { MyClassesContext } from "../../context/MyClassesContext";
 import ClassItem from "./ClassItem";
 import DeleteModal from "./DeleteModal";
 import FONTS from "../../constants/Fonts";
 
 const MyClasses = ({ navigation }) => {
-
   const { myClassList, deleteClass } = useContext(MyClassesContext);
 
   const [itemSelected, setItemSelected] = useState({});
@@ -25,21 +24,12 @@ const MyClasses = ({ navigation }) => {
 
   return (
     <View>
-      <Button
-        title="Agregar clases"
-        onPress={() => {
-          navigation.navigate("GetClasses");
-        }}
-      />
-
       <Text style={styles.title}>Mis próximas clases</Text>
 
       <View style={styles.container}>
         {myClassList.length === 0 ? (
           <Text style={styles.emptyList}>No has agregado clases</Text>
         ) : (
-
-
           <View style={styles.listContainer}>
             <FlatList
               contentContainerStyle={styles.contentContainer}
@@ -55,8 +45,6 @@ const MyClasses = ({ navigation }) => {
               }}
             />
           </View>
-
-
         )}
       </View>
 
@@ -90,10 +78,10 @@ const styles = StyleSheet.create({
   },
 
   listContainer: {
-    width: '90%',
+    width: "90%",
   },
 
-  contentContainer:{
-    alignItems: 'center'
-  }
+  contentContainer: {
+    alignItems: "center",
+  },
 });

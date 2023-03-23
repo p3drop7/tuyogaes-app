@@ -1,29 +1,11 @@
 import React from "react";
+import {CLASSES} from '../data/classes'
 
 export const ClassesContext = React.createContext()
 
 const ClassesContextProvider =({children})=> {
-
-    const [classes, setClasses] = React.useState([])
-
-    const [fetched, setFetched] = React.useState([
-		  {status: 'disponible', dateString: '2023-03-13', day: 13, month: 3, year: 2023, time: 10},
-      {status: 'disponible', dateString: '2023-03-13', day: 13, month: 3, year: 2023, time: 17},
-      {status: 'sin cupos', dateString: '2023-03-13', day: 13, month: 3, year: 2023, time: 18},
-      {status: 'sin cupos', dateString: '2023-03-13', day: 13, month: 3, year: 2023, time: 19},
-      {status: 'disponible', dateString: '2023-03-14', day: 14, month: 3, year: 2023, time: 10},
-      {status: 'cancelada', dateString: '2023-03-14', day: 14, month: 3, year: 2023, time: 17},
-      {status: 'disponible', dateString: '2023-03-14', day: 14, month: 3, year: 2023, time: 18},
-      {status: 'disponible', dateString: '2023-03-14', day: 14, month: 3, year: 2023, time: 19},
-      {status: 'sin cupos', dateString: '2023-03-15', day: 15, month: 3, year: 2023, time: 10},
-      {status: 'disponible', dateString: '2023-03-15', day: 15, month: 3, year: 2023, time: 17},
-      {status: 'disponible', dateString: '2023-03-15', day: 15, month: 3, year: 2023, time: 18},
-      {status: 'sin cupos', dateString: '2023-03-15', day: 15, month: 3, year: 2023, time: 19},
-      {status: 'disponible', dateString: '2023-03-16', day: 16, month: 3, year: 2023, time: 10},
-      {status: 'disponible', dateString: '2023-03-16', day: 16, month: 3, year: 2023, time: 17},
-      {status: 'sin cupos', dateString: '2023-03-16', day: 16, month: 3, year: 2023, time: 18},
-      {status: 'disponible', dateString: '2023-03-16', day: 16, month: 3, year: 2023, time: 19},
-    ])
+  
+  const [classes, setClasses] = React.useState([])
 
   const getMonth = (monthNum) => {
     let months = {
@@ -44,14 +26,15 @@ const ClassesContextProvider =({children})=> {
   };
 
   React.useEffect(() => {
-    let counter = 0
-    const fetchedClasses = fetched.map((item) => {
-      counter++
-      return { ...item, monthName: getMonth(item.month), key: Date.now() + counter };
-    });
+    let counter = 0;
     
+    const fetchedClasses = CLASSES.map((item) => {
+      counter++;
+      return {...item, monthName: getMonth(item.month), key: Date.now() + counter };
+    })
+
     setClasses(fetchedClasses)
-  }, [fetched])
+  }, [])
   
   return (
     <ClassesContext.Provider value={classes}>

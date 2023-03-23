@@ -1,18 +1,20 @@
-import { StyleSheet, View, Dimensions } from 'react-native'
 import React from 'react'
+import { Dimensions, ScrollView, StyleSheet, View } from 'react-native'
 import ProfileDisplay from '../components/ProfileDisplay/ProfileDisplay'
-import AvailableClasses from '../components/AvailableClasses/Index'
+import MyClasses from '../components/MyClasses/Index'
 
-const GetClasses = () => {
+const DashboardScreen = ({navigation}) => {
   return (
     <View style={styles.screen}>
       <ProfileDisplay />
-      <AvailableClasses />
+      <ScrollView>
+        <MyClasses navigation={navigation} />
+      </ScrollView>
     </View>
-  )
+  );
 }
 
-export default GetClasses
+export default DashboardScreen
 
 const styles = StyleSheet.create({
   screen: {
