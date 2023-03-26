@@ -1,4 +1,4 @@
-import { Button, FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useContext, useState } from "react";
 import { MyClassesContext } from "../../context/MyClassesContext";
 import ClassItem from "./ClassItem";
@@ -23,7 +23,7 @@ const MyClasses = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <ScrollView>
       <Text style={styles.title}>Mis próximas clases</Text>
 
       <View style={styles.container}>
@@ -54,7 +54,7 @@ const MyClasses = ({ navigation }) => {
         onHandlerModal={onHandlerModal}
         deleteItem={deleteItem}
       />
-    </View>
+    </ScrollView>
   );
 };
 
