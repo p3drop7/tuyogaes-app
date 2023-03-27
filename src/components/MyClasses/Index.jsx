@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import FONTS from "../../constants/Fonts";
 import ClassItem from "./ClassItem";
 import DeleteModal from "./DeleteModal";
+import { deleteClass , selectClass } from '../../store/actions/myClasses.actions';
 
 const MyClasses = () => {
 
@@ -12,23 +13,25 @@ const MyClasses = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const myClasses = useSelector( state => state.myClasses.myClasses )
+  const selectedClass = useSelector( state => state.myClasses.selectedClass )
+  const dispatch = useDispatch()
 
   const onHandlerModal = (key) => {
     let currentItem = myClasses.filter((item) => item.key === key)[0];
+    dispatch( selectClass(currentItem) )
     setItemSelected(currentItem);
     setModalVisible(!modalVisible);
   };
 
   const deleteItem = () => {
-    deleteClass(itemSelected);
+    dispatch( deleteClass(selectedClass) )
     setModalVisible(!modalVisible);
   };
 
 
-
-  React.useEffect(() => {
-    console.log('myClasses', myClasses)
-  })
+  // React.useEffect(() => {
+  //   console.log('myClasses', myClasses)
+  // })
 
 
   return (

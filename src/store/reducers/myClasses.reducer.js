@@ -1,4 +1,4 @@
-import { ADD_CLASS } from '../actions/myClasses.actions'
+import { ADD_CLASS, DELETE_CLASS } from '../actions/myClasses.actions'
 import { SELECT_CLASS } from '../actions/myClasses.actions'
 
 const initialState = {
@@ -23,6 +23,15 @@ const MyClassesReducer = ( state = initialState, action) => {
             return {
                 ...state,
                 selectedClass: action.classItem
+            }
+
+        case DELETE_CLASS:
+            const newMyClasses = state.myClasses.filter((item) => {
+                return item.key !== action.selectedClass.key
+            })
+            return {
+                ...state,
+                myClasses: newMyClasses
             }
 
         default:
