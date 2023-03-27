@@ -4,7 +4,8 @@ import ShadowBox from '../../wrappers/ShadowBox'
 import COLORS from "../../constants/Colors";
 import FONTS from "../../constants/Fonts";
 
-const DaiClassItem = ({ classItem, addModalHandler }) => {
+const DayClassItem = ({ classItem, addModalHandler }) => {
+
   const status = classItem.status.toUpperCase();
 
   return (
@@ -26,7 +27,7 @@ const DaiClassItem = ({ classItem, addModalHandler }) => {
   );
 };
 
-export default DaiClassItem;
+export default DayClassItem;
 
 const styles = StyleSheet.create({
   classContainer: {

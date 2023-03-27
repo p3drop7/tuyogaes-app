@@ -1,11 +1,12 @@
+import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Calendar, LocaleConfig } from 'react-native-calendars'
-import React from 'react'
 import COLORS from '../../constants/Colors';
 
 const ClassCalendar = ({classes, onSelectDay}) => {
-
+ 
   let calendarClasses = {}
+
   classes.map(item => {
     calendarClasses[item.dateString] = { selected: true, selectedColor: COLORS.darkGreen }
   })
@@ -38,6 +39,7 @@ const ClassCalendar = ({classes, onSelectDay}) => {
         onDayPress={(day) => {
           onSelectDay(day)
         }}
+        
         markedDates={calendarClasses}
         enableSwipeMonths={true}
         theme={{

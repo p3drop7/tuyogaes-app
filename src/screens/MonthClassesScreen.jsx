@@ -4,6 +4,7 @@ import ProfileDisplay from '../components/ProfileDisplay/ProfileDisplay'
 import MonthClasses from '../components/MonthClasses/Index'
 
 const MonthClassesScreen = ({navigation}) => {
+  
   return (
     <View style={styles.screen}>
       <ProfileDisplay />

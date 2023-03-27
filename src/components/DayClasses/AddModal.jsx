@@ -3,7 +3,7 @@ import React from 'react'
 import COLORS from '../../constants/Colors';
 import FONTS from '../../constants/Fonts';
 
-const AddModal = ({addModalVisible, itemAdd, addClassModal, addModalHandler}) => {
+const AddModal = ({addModalVisible, selectedClass, addClassModal, addModalHandler}) => {
   return (
     <Modal animationType="slide" visible={addModalVisible}>
       <View style={styles.modalContainer1}>
@@ -13,7 +13,7 @@ const AddModal = ({addModalVisible, itemAdd, addClassModal, addModalHandler}) =>
           <Pressable
             style={styles.cancelPressable}
             onPress={() => {
-                addClassModal(itemAdd);
+                addClassModal(selectedClass);
             }}
           >
             <Text style={styles.modalCancelPressableText}>Agregar</Text>

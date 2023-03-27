@@ -1,18 +1,20 @@
+import React, { useState } from "react";
 import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
-import React, { useContext, useState } from "react";
-import { MyClassesContext } from "../../context/MyClassesContext";
+import { useSelector } from "react-redux";
+
+import FONTS from "../../constants/Fonts";
 import ClassItem from "./ClassItem";
 import DeleteModal from "./DeleteModal";
-import FONTS from "../../constants/Fonts";
 
-const MyClasses = ({ navigation }) => {
-  const { myClassList, deleteClass } = useContext(MyClassesContext);
+const MyClasses = () => {
 
   const [itemSelected, setItemSelected] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
 
+  const myClasses = useSelector( state => state.myClasses.myClasses )
+
   const onHandlerModal = (key) => {
-    let currentItem = myClassList.filter((item) => item.key === key)[0];
+    let currentItem = myClasses.filter((item) => item.key === key)[0];
     setItemSelected(currentItem);
     setModalVisible(!modalVisible);
   };
@@ -22,18 +24,27 @@ const MyClasses = ({ navigation }) => {
     setModalVisible(!modalVisible);
   };
 
+
+
+  React.useEffect(() => {
+    console.log('myClasses', myClasses)
+  })
+
+
   return (
     <ScrollView>
       <Text style={styles.title}>Mis próximas clases</Text>
 
       <View style={styles.container}>
-        {myClassList.length === 0 ? (
+
+        { myClasses.length === 0 ? (
           <Text style={styles.emptyList}>No has agregado clases</Text>
+
         ) : (
           <View style={styles.listContainer}>
             <FlatList
               contentContainerStyle={styles.contentContainer}
-              data={myClassList}
+              data={myClasses}
               keyExtractor={(item) => item.key}
               renderItem={(itemData) => {
                 return (
@@ -46,6 +57,7 @@ const MyClasses = ({ navigation }) => {
             />
           </View>
         )}
+
       </View>
 
       <DeleteModal

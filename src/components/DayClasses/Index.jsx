@@ -1,37 +1,42 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { MyClassesContext } from "../../context/MyClassesContext";
+import { useDispatch, useSelector } from "react-redux";
+
 import FONTS from "../../constants/Fonts";
 import DayClassItem from "./DayClassItem";
 import AddModal from "./AddModal";
+import { addClass , selectClass } from "../../store/actions/myClasses.actions";
 
-const DayClasses = ({ route }) => {
-  
-  const { daySelected } = route.params
-  
-  const { addClass } = React.useContext(MyClassesContext);
 
+const DayClasses = ({route}) => {
+  
   const [itemAdd, setItemAdd] = React.useState({});
 	const [addModalVisible, setAddModalVisible] = React.useState(false);
 
+  const filteredClasses = useSelector( state => state.classes.filteredClasses )
+  const selectedClass = useSelector( state => state.myClasses.selectedClass )
+  const dispatch = useDispatch()
+
+  const daySelected = route.params.daySelected
+
   const addModalHandler =(classItem)=>{
-    setItemAdd(classItem)
+    dispatch( selectClass(classItem) )
     setAddModalVisible(!addModalVisible)
   }
 
-  const addClassModal =(itemAdd)=>{
-    addClass(itemAdd)
-    setItemAdd({})
+  const addClassModal =(selectedClass)=>{
+    dispatch( addClass( selectedClass ) )
+    dispatch( selectClass( null ) )
     setAddModalVisible(!addModalVisible)
   }
 
   const goBack =()=>{
-    setItemAdd({})
+    dispatch( selectClass( null ) )
     setAddModalVisible(!addModalVisible)
   }
 
-  const month = daySelected[0].monthName;
-  const day = daySelected[0].day;
+  const month = daySelected.monthName;
+  const day = daySelected.day;
 
   return (
     <View style={styles.dayClassesContainer}>
@@ -55,7 +60,7 @@ const DayClasses = ({ route }) => {
       <Text style={styles.selectText}>Selecciona una clase:</Text>
 
       <View style={styles.classItemsContainer}>
-        {daySelected.map((item) => {
+        {filteredClasses.map((item) => {
           return (
             <DayClassItem
               classItem={item}
@@ -69,7 +74,7 @@ const DayClasses = ({ route }) => {
       <AddModal
         addModalHandler={addModalHandler}
         addClassModal={addClassModal}
-        itemAdd={itemAdd}
+        selectedClass={selectedClass}
         addModalVisible={addModalVisible}
       />
     </View>

@@ -1,11 +1,14 @@
-import { Keyboard, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import React from "react";
-import * as SplashScreen from 'expo-splash-screen';
-import { useFonts, Comfortaa_700Bold, Comfortaa_300Light, Comfortaa_400Regular, Comfortaa_600SemiBold, Comfortaa_500Medium } from '@expo-google-fonts/comfortaa';
-import MainNavigator from "./navigators/MainNavigator";
+import { Keyboard, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import MainNavigator from "./navigators/MainNavigator";
+import { Provider } from 'react-redux'
+import { useFonts, Comfortaa_700Bold, Comfortaa_300Light, Comfortaa_400Regular, Comfortaa_600SemiBold, Comfortaa_500Medium } from '@expo-google-fonts/comfortaa';
+import * as SplashScreen from 'expo-splash-screen';
+
 import MyClassesContextProvider from "./context/MyClassesContext";
 import ClassesContextProvider from "./context/ClassesContext";
+import store from './store'
 
 SplashScreen.preventAutoHideAsync();
 
@@ -29,21 +32,21 @@ const Index = () => {
   }
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
-      <TouchableWithoutFeedback
-        onPress={() => {
-          Keyboard.dismiss();
-        }}
-      >
-
-        <ClassesContextProvider>
-          <MyClassesContextProvider>
-            <MainNavigator />
-          </MyClassesContextProvider>
-        </ClassesContextProvider>
-        
-      </TouchableWithoutFeedback>
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView style={styles.safeAreaContainer}>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Keyboard.dismiss();
+          }}
+        >
+          <ClassesContextProvider>
+            <MyClassesContextProvider>
+              <MainNavigator />
+            </MyClassesContextProvider>
+          </ClassesContextProvider>
+        </TouchableWithoutFeedback>
+      </SafeAreaView>
+    </Provider>
   );
 };
 

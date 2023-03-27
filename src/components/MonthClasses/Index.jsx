@@ -1,25 +1,23 @@
-import React, { useContext, useState } from "react";
-import { StyleSheet } from "react-native";
-import { ClassesContext } from "../../context/ClassesContext";
+import React from "react";
 import ClassCalendar from "./ClassCalendar";
+import { StyleSheet } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+
+import { filterDayClasses } from '../../store/actions/classes.actions';
 
 const Index = ({navigation}) => {
 
-  const classes = useContext(ClassesContext);
+  const classes = useSelector( state => state.classes.classes )
+  const dispatch = useDispatch()
 
-  const onSelectDay = (day) => {
+  //Funtion to return classes on the day selected
+  const onSelectDay = (daySelected) => {
+    dispatch( filterDayClasses(daySelected) )
 
-    let currentDayClasses = classes.filter(
-      (item) => item.dateString === day.dateString
-    );
-    
-    let available = classes.find((item) => item.dateString === day.dateString);
-
-    if(available){
-      navigation.navigate('DayClassesScreen', {
-        daySelected: currentDayClasses
-      })
-    }
+    let available = classes.find((item) => item.dateString === daySelected.dateString);
+    available && navigation.navigate('DayClassesScreen', {
+      daySelected: daySelected
+    })
   };
 
   return <ClassCalendar classes={classes} onSelectDay={onSelectDay} />;
