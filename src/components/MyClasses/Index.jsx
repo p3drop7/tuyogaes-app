@@ -35,7 +35,7 @@ const MyClasses = () => {
 
 
   return (
-    <ScrollView>
+    <>
       <Text style={styles.title}>Mis próximas clases</Text>
 
       <View style={styles.container}>
@@ -69,7 +69,7 @@ const MyClasses = () => {
         onHandlerModal={onHandlerModal}
         deleteItem={deleteItem}
       />
-    </ScrollView>
+    </>
   );
 };
 
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
 
   listContainer: {
     width: "90%",
+    marginBottom: 300
   },
 
   contentContainer: {
