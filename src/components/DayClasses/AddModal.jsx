@@ -3,7 +3,9 @@ import React from 'react'
 import COLORS from '../../constants/Colors';
 import FONTS from '../../constants/Fonts';
 
-const AddModal = ({addModalVisible, selectedClass, addClassModal, addModalHandler}) => {
+const AddModal = ({addModalVisible, selectedClass, addClassModal, modalHandler}) => {
+  
+	// Modal to add a class to state.myClasses
   return (
     <Modal animationType="slide" visible={addModalVisible}>
       <View style={styles.modalContainer1}>
@@ -13,7 +15,7 @@ const AddModal = ({addModalVisible, selectedClass, addClassModal, addModalHandle
           <Pressable
             style={styles.cancelPressable}
             onPress={() => {
-                addClassModal(selectedClass);
+              addClassModal(selectedClass);
             }}
           >
             <Text style={styles.modalCancelPressableText}>Agregar</Text>
@@ -22,7 +24,7 @@ const AddModal = ({addModalVisible, selectedClass, addClassModal, addModalHandle
           <Pressable
             style={styles.returnPressable}
             onPress={() => {
-                addModalHandler();
+              modalHandler();
             }}
           >
             <Text style={styles.modalReturnPressableText}>Salir</Text>

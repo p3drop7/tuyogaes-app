@@ -1,17 +1,19 @@
 import { ADD_CLASS, DELETE_CLASS } from '../actions/myClasses.actions'
 import { SELECT_CLASS } from '../actions/myClasses.actions'
+import { ADD_FB } from '../actions/myClasses.actions'
 
 const initialState = {
     myClasses: [],
-    selectedClass: null
+    selectedClass: null,
+    classesInFB: null
 }
 
 const MyClassesReducer = ( state = initialState, action) => {
     
     switch( action.type ){
 
+        // Add a class to state.myClasses and show it on deshboard screen list
         case ADD_CLASS:
-
             if( !state.myClasses.some( item => item.key === action.selectedClass.key)) {
                 return {
                     ...state,
@@ -19,12 +21,14 @@ const MyClassesReducer = ( state = initialState, action) => {
                 }
             }
 
+        // Select a class on dashboard screen to show on pop-up modal
         case SELECT_CLASS:
             return {
                 ...state,
                 selectedClass: action.classItem
             }
-
+        
+        // Delete a class from state.myClasses and erase it from dashboard screen list
         case DELETE_CLASS:
             const newMyClasses = state.myClasses.filter((item) => {
                 return item.key !== action.selectedClass.key
@@ -32,6 +36,14 @@ const MyClassesReducer = ( state = initialState, action) => {
             return {
                 ...state,
                 myClasses: newMyClasses
+            }
+
+        // Add class list from dashboard screen list (state.myClasses) to Firebase
+        case ADD_FB:
+            console.log('Added:', action.classesInFB)
+            return {
+                ...state,
+                classesInFB: action.classesInFB
             }
 
         default:

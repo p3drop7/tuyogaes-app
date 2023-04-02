@@ -10,33 +10,38 @@ import { addClass , selectClass } from "../../store/actions/myClasses.actions";
 
 const DayClasses = ({route}) => {
   
-  const [itemAdd, setItemAdd] = React.useState({});
-	const [addModalVisible, setAddModalVisible] = React.useState(false);
-
+  // Classes filtered on day selected 
   const filteredClasses = useSelector( state => state.classes.filteredClasses )
+
+  // Selected class to be added to pop-up modal, then to state.myClasses
   const selectedClass = useSelector( state => state.myClasses.selectedClass )
+
+  // State for pop-up modal
+	const [addModalVisible, setAddModalVisible] = React.useState(false);
+  
+  // Day selected to be shown on screen title
+  const daySelected = route.params.daySelected
+  
   const dispatch = useDispatch()
 
-  const daySelected = route.params.daySelected
-
-  const addModalHandler =(classItem)=>{
+  // Function to open modal
+  const modalHandler =(classItem)=>{
     dispatch( selectClass(classItem) )
     setAddModalVisible(!addModalVisible)
   }
 
+  // Function to add class to state.myClasses from pop-up modal
   const addClassModal =(selectedClass)=>{
     dispatch( addClass( selectedClass ) )
     dispatch( selectClass( null ) )
     setAddModalVisible(!addModalVisible)
   }
 
+  // Function to cancel and go back to select another class
   const goBack =()=>{
     dispatch( selectClass( null ) )
     setAddModalVisible(!addModalVisible)
   }
-
-  const month = daySelected.monthName;
-  const day = daySelected.day;
 
   return (
     <View style={styles.dayClassesContainer}>
@@ -52,8 +57,8 @@ const DayClasses = ({route}) => {
         </Pressable>
 
         <View style={styles.dateContainer2}>
-          <Text style={styles.dateText}>{month}</Text>
-          <Text style={styles.dateText}> {day}</Text>
+          <Text style={styles.dateText}>{ daySelected.month }</Text>
+          <Text style={styles.dateText}> { daySelected.day }</Text>
         </View>
       </View>
 
@@ -64,7 +69,7 @@ const DayClasses = ({route}) => {
           return (
             <DayClassItem
               classItem={item}
-              addModalHandler={addModalHandler}
+              modalHandler={modalHandler}
               key={item.key}
             />
           );
@@ -72,7 +77,7 @@ const DayClasses = ({route}) => {
       </View>
 
       <AddModal
-        addModalHandler={addModalHandler}
+        modalHandler={modalHandler}
         addClassModal={addClassModal}
         selectedClass={selectedClass}
         addModalVisible={addModalVisible}

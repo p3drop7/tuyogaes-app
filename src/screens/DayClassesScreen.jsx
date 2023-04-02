@@ -3,6 +3,7 @@ import React from 'react'
 import ProfileDisplay from '../components/ProfileDisplay/ProfileDisplay'
 import DayClasses from '../components/DayClasses/Index'
 
+// Screen to show classes on a selected day from calendar on MonthClasses screen
 const DayClassesScreen = ({route, navigation}) => {
   return (
     <View style={styles.screen}>

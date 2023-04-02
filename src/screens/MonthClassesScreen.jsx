@@ -3,8 +3,9 @@ import { StyleSheet, View, Dimensions } from 'react-native'
 import ProfileDisplay from '../components/ProfileDisplay/ProfileDisplay'
 import MonthClasses from '../components/MonthClasses/Index'
 
+// Screen with a calendar to show days with available classes
+// User can select a day to show a list of classes on that day on DayClasses screen
 const MonthClassesScreen = ({navigation}) => {
-  
   return (
     <View style={styles.screen}>
       <ProfileDisplay />

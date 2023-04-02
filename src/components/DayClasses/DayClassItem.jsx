@@ -4,7 +4,7 @@ import ShadowBox from '../../wrappers/ShadowBox'
 import COLORS from "../../constants/Colors";
 import FONTS from "../../constants/Fonts";
 
-const DayClassItem = ({ classItem, addModalHandler }) => {
+const DayClassItem = ({ classItem, modalHandler }) => {
 
   const status = classItem.status.toUpperCase();
 
@@ -13,7 +13,7 @@ const DayClassItem = ({ classItem, addModalHandler }) => {
       <Pressable
         style={styles.classPressableContainer}
         onPress={() => {
-          addModalHandler(classItem);
+          modalHandler(classItem);
         }}
       >
         <Image

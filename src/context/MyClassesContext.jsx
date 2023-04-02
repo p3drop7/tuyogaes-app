@@ -1,5 +1,6 @@
 import React from "react";
 
+// NOT USER... TO BE ERASED
 export const MyClassesContext = React.createContext();
 
 const MyClassesContextProvider = ({ children }) => {

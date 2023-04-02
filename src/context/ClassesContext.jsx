@@ -1,6 +1,8 @@
 import React from "react";
 import {CLASSES} from '../data/classes'
 
+
+// NOT USER... TO BE ERASED
 export const ClassesContext = React.createContext()
 
 const ClassesContextProvider =({children})=> {

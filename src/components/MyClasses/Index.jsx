@@ -1,21 +1,28 @@
 import React, { useState } from "react";
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, Button, StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 import FONTS from "../../constants/Fonts";
 import ClassItem from "./ClassItem";
 import DeleteModal from "./DeleteModal";
-import { deleteClass , selectClass } from '../../store/actions/myClasses.actions';
+import { deleteClass , selectClass, addToFB } from '../../store/actions/myClasses.actions';
 
 const MyClasses = () => {
 
+  // Item select to pass it to modal pop-up
   const [itemSelected, setItemSelected] = useState({});
+
+  // State for pop-up modal
   const [modalVisible, setModalVisible] = useState(false);
 
+  // State in redux to save a list of classes selected from MonthClasses and DayClasses screens
   const myClasses = useSelector( state => state.myClasses.myClasses )
+
+  // Selected class to show on pop-up modal
   const selectedClass = useSelector( state => state.myClasses.selectedClass )
   const dispatch = useDispatch()
 
+  // Function to open Modal
   const onHandlerModal = (key) => {
     let currentItem = myClasses.filter((item) => item.key === key)[0];
     dispatch( selectClass(currentItem) )
@@ -23,20 +30,22 @@ const MyClasses = () => {
     setModalVisible(!modalVisible);
   };
 
+  // Funtion to delete item from state.myClasses in pop-up modal
   const deleteItem = () => {
     dispatch( deleteClass(selectedClass) )
     setModalVisible(!modalVisible);
   };
 
 
-  // React.useEffect(() => {
-  //   console.log('myClasses', myClasses)
-  // })
-
-
   return (
     <>
       <Text style={styles.title}>Mis próximas clases</Text>
+
+      <Button title="agregar" onPress={() =>{
+
+        dispatch(addToFB(myClasses))
+      }
+      } />
 
       <View style={styles.container}>
 

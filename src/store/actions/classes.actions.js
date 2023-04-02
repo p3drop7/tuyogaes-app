@@ -2,34 +2,26 @@ import { API_URL } from '../../constants/data'
 export const GET_CLASSES = 'GET_CLASSES'
 export const FILTER_DAY_CLASSES = 'FILTER_DAY_CLASSES'
 
-export const getCLasses = () => {
+export const getClasses = () => {
     return async dispatch => {
+
         try {
-            const response = await fetch(`${API_URL}classes.json`, {
+            const response = await fetch(`${API_URL}classes.json`,{
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 }
-            })
-
-            const resData = await response.json()
-            console.log('RESPONSE', response)
-            // const classes = Object.keys(resData).map(key => {
-            //     return {
-            //         id: key,
-            //         ...resData[key]
-            //     }
-            // });
-
-            // console.log('classes', classes)
-
+            });
+            
+            const resData = await response.json();
+            
             dispatch({
                 type: GET_CLASSES,
-                resData
-            })
-        
-        } catch(error) {
-            console.log(error)
+                classes: resData
+            });
+
+        } catch (error) {
+            console.log(error);
         }
     }
 }

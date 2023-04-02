@@ -3,6 +3,7 @@ import React from 'react'
 import COLORS from '../../constants/Colors'
 import FONTS from '../../constants/Fonts';
 
+// User's profile display
 const ProfileDisplay = () => {
   return (
     <View style={styles.container}>
