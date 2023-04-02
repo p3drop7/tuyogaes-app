@@ -1,1 +1,0 @@
-export const URL_API = 'https://tuyogaes-app-default-rtdb.europe-west1.firebasedatabase.app/'

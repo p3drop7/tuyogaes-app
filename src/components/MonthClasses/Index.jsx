@@ -3,12 +3,18 @@ import ClassCalendar from "./ClassCalendar";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
-import { filterDayClasses } from '../../store/actions/classes.actions';
+import { filterDayClasses, getCLasses } from '../../store/actions/classes.actions';
 
 const Index = ({navigation}) => {
 
   const classes = useSelector( state => state.classes.classes )
   const dispatch = useDispatch()
+
+  // React.useEffect(() => {
+  //   console.log('classes in component', classes)
+  //   dispatch(getCLasses())
+  // }, [])
+  
 
   //Funtion to return classes on the day selected
   const onSelectDay = (daySelected) => {

@@ -1,5 +1,6 @@
-import { OTHERCLASSES } from '../../data/otherClasses'
+import { GET_CLASSES } from '../actions/classes.actions'
 import { FILTER_DAY_CLASSES } from '../actions/classes.actions'
+import { OTHERCLASSES } from '../../data/otherClasses'
 
 const initialState = {
     classes: OTHERCLASSES,
@@ -9,6 +10,12 @@ const initialState = {
 const ClassesReducer = ( state = initialState, action) => {
     
     switch( action.type ){
+
+        case GET_CLASSES:
+            return {
+                ...state,
+                classes: action.response
+            }
 
         //Filter day classes and pass them on to screen: DayClassesScreen
         case FILTER_DAY_CLASSES:
