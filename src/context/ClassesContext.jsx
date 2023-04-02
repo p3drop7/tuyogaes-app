@@ -1,48 +1,49 @@
-import React from "react";
-import {CLASSES} from '../data/classes'
+// NOT IN USE ... TO BE ERASED
+
+// import React from "react";
+// import {CLASSES} from '../data/classes'
 
 
-// NOT USER... TO BE ERASED
-export const ClassesContext = React.createContext()
+// export const ClassesContext = React.createContext()
 
-const ClassesContextProvider =({children})=> {
+// const ClassesContextProvider =({children})=> {
   
-  const [classes, setClasses] = React.useState([])
+//   const [classes, setClasses] = React.useState([])
 
-  const getMonth = (monthNum) => {
-    let months = {
-      1: "Enero",
-      2: "Febrero",
-      3: "Marzo",
-      4: "Abril",
-      5: "Mayo",
-      6: "Junio",
-      7: "Julio",
-      8: "Agosto",
-      9: "Septiembre",
-      10: "Octubre",
-      11: "Noviembre",
-      12: "Diciembre",
-    };
-    return months[monthNum];
-  };
+//   const getMonth = (monthNum) => {
+//     let months = {
+//       1: "Enero",
+//       2: "Febrero",
+//       3: "Marzo",
+//       4: "Abril",
+//       5: "Mayo",
+//       6: "Junio",
+//       7: "Julio",
+//       8: "Agosto",
+//       9: "Septiembre",
+//       10: "Octubre",
+//       11: "Noviembre",
+//       12: "Diciembre",
+//     };
+//     return months[monthNum];
+//   };
 
-  React.useEffect(() => {
-    let counter = 0;
+//   React.useEffect(() => {
+//     let counter = 0;
     
-    const fetchedClasses = CLASSES.map((item) => {
-      counter++;
-      return {...item, monthName: getMonth(item.month), key: Date.now() + counter };
-    })
+//     const fetchedClasses = CLASSES.map((item) => {
+//       counter++;
+//       return {...item, monthName: getMonth(item.month), key: Date.now() + counter };
+//     })
 
-    setClasses(fetchedClasses)
-  }, [])
+//     setClasses(fetchedClasses)
+//   }, [])
   
-  return (
-    <ClassesContext.Provider value={classes}>
-      {children}
-    </ClassesContext.Provider>
-  );
-}
+//   return (
+//     <ClassesContext.Provider value={classes}>
+//       {children}
+//     </ClassesContext.Provider>
+//   );
+// }
 
-export default ClassesContextProvider
+// export default ClassesContextProvider

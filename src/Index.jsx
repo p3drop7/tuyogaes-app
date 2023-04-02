@@ -5,9 +5,6 @@ import MainNavigator from "./navigators/MainNavigator";
 import { Provider } from 'react-redux'
 import { useFonts, Comfortaa_700Bold, Comfortaa_300Light, Comfortaa_400Regular, Comfortaa_600SemiBold, Comfortaa_500Medium } from '@expo-google-fonts/comfortaa';
 import * as SplashScreen from 'expo-splash-screen';
-
-import MyClassesContextProvider from "./context/MyClassesContext";
-import ClassesContextProvider from "./context/ClassesContext";
 import store from './store'
 
 SplashScreen.preventAutoHideAsync();
@@ -39,11 +36,7 @@ const Index = () => {
             Keyboard.dismiss();
           }}
         >
-          <ClassesContextProvider>
-            <MyClassesContextProvider>
-              <MainNavigator />
-            </MyClassesContextProvider>
-          </ClassesContextProvider>
+          <MainNavigator />
         </TouchableWithoutFeedback>
       </SafeAreaView>
     </Provider>
