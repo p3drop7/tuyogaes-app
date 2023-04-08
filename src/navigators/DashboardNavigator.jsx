@@ -1,7 +1,7 @@
-import { StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import DashboardScreen from '../screens/DashboardScreen';
+import ProfileScreen from "../screens/ProfileScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,5 +14,3 @@ const DashboardNavigator = () => {
 };
 
 export default DashboardNavigator;
-
-const styles = StyleSheet.create({});

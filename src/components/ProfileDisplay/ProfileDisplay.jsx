@@ -1,4 +1,4 @@
-import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import COLORS from '../../constants/Colors'
 import FONTS from '../../constants/Fonts';
@@ -17,6 +17,7 @@ const ProfileDisplay = () => {
           <Text style={styles.name}>Palencia</Text>
         </View>
       </View>
+
       <Image
         source={require("../../../assets/images/user.png")}
         style={styles.userImage}

@@ -7,7 +7,7 @@ import MyClasses from "../components/MyClasses/Index";
 const DashboardScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
-      <ProfileDisplay />
+      <ProfileDisplay navigation={navigation}/>
       <MyClasses navigation={navigation} />
     </View>
   );
