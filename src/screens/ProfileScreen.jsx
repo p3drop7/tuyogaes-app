@@ -3,10 +3,16 @@ import { StyleSheet, Text, View, Image, Pressable, Alert } from 'react-native'
 import { Feather } from '@expo/vector-icons';
 import FONTS from '../constants/Fonts';
 import * as ImagePicker from 'expo-image-picker'
+import { useDispatch, useSelector } from 'react-redux';
+import { takeImage } from '../store/actions/profile.actions'
+
 
 const ProfileScreen = () => {
 
-    const [profileImage, setProfileImage] = React.useState(null)
+    const dispatch = useDispatch()
+    const profileImage = useSelector(state => state.profile.profileImage)
+    
+    // const [profileImage, setProfileImage] = React.useState(null)
 
     const verifyPremissions = async ()=>{
         const { status } = await ImagePicker.requestCameraPermissionsAsync()
@@ -18,7 +24,7 @@ const ProfileScreen = () => {
         return true
     }
 
-    const takeImage = async ()=> {
+    const takeImageHandler = async ()=> {
         const isCamPremissionsOk = await verifyPremissions()
         if (!isCamPremissionsOk) return
 
@@ -28,8 +34,11 @@ const ProfileScreen = () => {
             quality: 0.8
         })
 
-        console.log(image.uri)
-        setProfileImage(image.uri)
+        dispatch( takeImage(image.assets[0].uri) )
+
+        // console.log('URI', image.uri.split('/').pop())
+
+        // setProfileImage(image.uri)
     }
 
   return (
@@ -40,18 +49,26 @@ const ProfileScreen = () => {
         <Text style={styles.profileText}>NAME</Text>
         <Text style={styles.profileText}>EMAIL@EMAIL.COM</Text>
 
-        <Pressable style={styles.profileImageContainer} onPress={()=>{
-            takeImage()
-        }}>
-            {/* { */}
-                {/* profileImage === null ? */}
-                 <Image source={require("../../assets/images/user.png")} style={styles.image}/>
-                    {/* : <Image source={require(profileImage)} style={styles.image} /> */}
-            {/* } */}
-        
-        <Feather name="edit-2" size={24} color="black" />
-        </Pressable>
+        <Pressable
+          style={styles.profileImageContainer}
+          onPress={() => {
+            takeImageHandler();
+          }}
+        >
+          {profileImage === null ? (
+            <Image
+              source={require("../../assets/images/user.png")}
+              style={styles.image}
+            />
+          ) : (
+            <Image 
+                source={{ uri: profileImage }} 
+                style={styles.image} 
+            />
+          )}
 
+          <Feather name="edit-2" size={24} color="black" />
+        </Pressable>
       </View>
     </View>
   );
@@ -93,6 +110,8 @@ const styles = StyleSheet.create({
 
     image: {
         height: '90%',
+        marginBottom: 10,
         aspectRatio: 1 / 1,
+        borderRadius: 500
     }
 })
