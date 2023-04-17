@@ -2,9 +2,20 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import COLORS from '../../constants/Colors'
 import FONTS from '../../constants/Fonts';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadImage } from '../../store/actions/profile.actions';
 
 // User's profile display
 const ProfileDisplay = () => {
+
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch( loadImage() )
+  }, [])
+
+  const profileImage = useSelector(state => state.profile.profileImage )
+
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -18,10 +29,18 @@ const ProfileDisplay = () => {
         </View>
       </View>
 
-      <Image
-        source={require("../../../assets/images/user.png")}
-        style={styles.userImage}
-      />
+      {profileImage === null ? (
+        <Image
+          source={require("../../../assets/images/user.png")}
+          style={styles.userImage}
+        />
+      ) : (
+        <Image 
+          source={{ uri: profileImage }} 
+          style={styles.userImage} 
+        />
+      )}
+
     </View>
   );
 }
@@ -71,6 +90,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       alignSelf: 'center',
       position: 'relative',
-      top: -50
+      top: -40
     }
 })

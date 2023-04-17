@@ -1,5 +1,5 @@
 
-import { TAKE_IMAGE } from "../actions/profile.actions"
+import { LOAD_IMAGE, TAKE_IMAGE } from "../actions/profile.actions"
 
 const initialState = {
     profileImage: null
@@ -11,9 +11,16 @@ const ProfileReducer = ( state = initialState, action) => {
 
         case TAKE_IMAGE:
             return {
-                ...state,
-                profileImage: action.imagePath
+                // ...state,
+                profileImage: action.payload.imagePath
             }
+
+            case LOAD_IMAGE:
+                const pic = action.payload.profileImage
+                return {
+                    ...state,
+                    profileImage: pic[pic.length - 1].image
+                }
 
         default:
             return state

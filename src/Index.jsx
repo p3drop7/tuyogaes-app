@@ -6,6 +6,16 @@ import { Provider } from 'react-redux'
 import { useFonts, Comfortaa_700Bold, Comfortaa_300Light, Comfortaa_400Regular, Comfortaa_600SemiBold, Comfortaa_500Medium } from '@expo-google-fonts/comfortaa';
 import * as SplashScreen from 'expo-splash-screen';
 import store from './store'
+import { init } from './db'
+
+init().then(
+  () => {
+    // console.log('Initialized database');
+  }
+).catch(err => {
+  console.log('Initializing db failed.');
+  console.log(err);
+});
 
 SplashScreen.preventAutoHideAsync();
 
