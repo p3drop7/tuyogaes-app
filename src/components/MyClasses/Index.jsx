@@ -42,9 +42,8 @@ const MyClasses = () => {
       <Text style={styles.title}>Mis próximas clases</Text>
 
       <Button title="agregar" onPress={() =>{
-
-        dispatch(addToFB(myClasses))
-      }
+          dispatch(addToFB(myClasses))
+        }
       } />
 
       <View style={styles.container}>

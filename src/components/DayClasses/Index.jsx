@@ -7,11 +7,11 @@ import DayClassItem from "./DayClassItem";
 import AddModal from "./AddModal";
 import { addClass , selectClass } from "../../store/actions/myClasses.actions";
 
-
 const DayClasses = ({route}) => {
   
   // Classes filtered on day selected 
   const filteredClasses = useSelector( state => state.classes.filteredClasses )
+  const classes = useSelector( state => state.classes.classes)
 
   // Selected class to be added to pop-up modal, then to state.myClasses
   const selectedClass = useSelector( state => state.myClasses.selectedClass )
@@ -21,12 +21,21 @@ const DayClasses = ({route}) => {
   
   // Day selected to be shown on screen title
   const daySelected = route.params.daySelected
-  
+
   const dispatch = useDispatch()
 
   // Function to open modal
   const modalHandler =(classItem)=>{
-    dispatch( selectClass(classItem) )
+    
+    const newClassItem = {
+      ...classItem, 
+      dayString: filteredClasses.dayString,
+      monthName: classes.monthString,
+      day: filteredClasses.day,
+      month: classes.monthNumber
+    }
+
+    dispatch( selectClass(newClassItem) )
     setAddModalVisible(!addModalVisible)
   }
 
@@ -37,35 +46,16 @@ const DayClasses = ({route}) => {
     setAddModalVisible(!addModalVisible)
   }
 
-  // Function to cancel and go back to select another class
-  const goBack =()=>{
-    dispatch( selectClass( null ) )
-    setAddModalVisible(!addModalVisible)
-  }
-
   return (
     <View style={styles.dayClassesContainer}>
-      <View style={styles.dateContainer1}>
-        
-        <Pressable
-          style={styles.goBackPressable}
-          onPress={() => {
-            goBack();
-          }}
-        >
-          <Text style={styles.goBackText}>Volver </Text>
-        </Pressable>
-
-        <View style={styles.dateContainer2}>
-          <Text style={styles.dateText}>{ daySelected.month }</Text>
-          <Text style={styles.dateText}> { daySelected.day }</Text>
-        </View>
+      <View style={styles.dateContainer}>
+        <Text style={styles.dateText}>{classes.monthString} {daySelected.day} ({filteredClasses.dayString}) </Text>
       </View>
 
       <Text style={styles.selectText}>Selecciona una clase:</Text>
 
       <View style={styles.classItemsContainer}>
-        {filteredClasses.map((item) => {
+        {filteredClasses.classes.map((item) => {
           return (
             <DayClassItem
               classItem={item}
@@ -95,22 +85,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  dateContainer1: {
+  dateContainer: {
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-  },
-
-  dateContainer2: {
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-
-  goBackText: {
-    fontFamily: FONTS.comfortaaLight,
-    fontSize: 20,
-    color: "gray",
   },
 
   dateText: {

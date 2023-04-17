@@ -6,8 +6,6 @@ import FONTS from "../../constants/Fonts";
 
 const DayClassItem = ({ classItem, modalHandler }) => {
 
-  const status = classItem.status.toUpperCase();
-
   return (
     <ShadowBox style={styles.classContainer}>
       <Pressable
@@ -21,7 +19,7 @@ const DayClassItem = ({ classItem, modalHandler }) => {
           style={styles.image}
         />
         <Text style={styles.hour}>{classItem.time} hrs</Text>
-        <Text style={styles.classStatus}>{status}</Text>
+        <Text style={styles.classStatus}>{classItem.status}</Text>
       </Pressable>
     </ShadowBox>
   );

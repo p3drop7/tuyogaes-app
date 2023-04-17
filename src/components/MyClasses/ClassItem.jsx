@@ -16,8 +16,8 @@ const ClassItem = ({ itemData, onHandlerModal }) => {
       <View style={styles.itemDescription}>
         <View>
           <Text style={styles.itemText}>
-			{itemData.item.monthName} {itemData.item.day}  -  {itemData.item.time}hrs 
-		  </Text>
+			      {itemData.item.monthName} {itemData.item.day}  -  {itemData.item.time}hrs 
+		      </Text>
         </View>
         <Pressable
           style={styles.cancelButton}

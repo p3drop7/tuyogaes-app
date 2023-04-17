@@ -14,25 +14,23 @@ const Index = ({ navigation }) => {
     dispatch(getClasses());
   }, []);
 
-  //Funtion to return classes on the day selected
+  // Function to return classes on the day selected
   const onSelectDay = (daySelected) => {
-    dispatch(filterDayClasses(daySelected));
-
-    //Check if there are classes available in such day
-    let available = classes.find(
-      (item) => item.dateString === daySelected.dateString
-    );
+    dispatch( filterDayClasses(daySelected) );
     
-    //IF available, navigate to next screen to select a class
+    // Check if there are classes available in such day
+    let available = classes.monthClasses.find( (item) => item.dateString === daySelected.dateString );
+    
+    // If available classes exist, navigate to next screen to select a class
     available &&
       navigation.navigate("DayClassesScreen", {
-        daySelected: daySelected,
+         daySelected: daySelected,
       });
   };
 
   return (
     <>
-      {classes.length === 0 ? (
+      {classes === null ? (
         <Text>...Cargando</Text>
       ) : (
         <ClassCalendar classes={classes} onSelectDay={onSelectDay} />

@@ -5,7 +5,7 @@ import FONTS from '../../constants/Fonts';
 
 const AddModal = ({addModalVisible, selectedClass, addClassModal, modalHandler}) => {
   
-	// Modal to add a class to state.myClasses
+  // Modal to add a class to state.myClasses
   return (
     <Modal animationType="slide" visible={addModalVisible}>
       <View style={styles.modalContainer1}>
