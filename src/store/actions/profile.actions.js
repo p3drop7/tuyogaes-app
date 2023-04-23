@@ -3,6 +3,7 @@ import { insertProfileImage, fetchProfileImage } from '../../db'
 
 export const TAKE_IMAGE = 'TAKE_IMAGE'
 export const LOAD_IMAGE = 'LOAD_IMAGE'
+export const TAKE_USERID = 'TAKE_USERID'
 
 export const takeImage = (imageUri) => {
     return async dispatch => {
@@ -52,3 +53,9 @@ export const loadImage = () => {
         }
     }
 }
+
+// Take and save user ID when registering or loggin to SQLite
+// export const takeUserId =(userId)=> ({
+//     type: TAKE_USERID,
+//     userId
+// })

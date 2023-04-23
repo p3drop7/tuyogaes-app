@@ -1,5 +1,7 @@
-import { SIGN_UP_URL } from "../../constants/data"
+import { LOG_IN_URL, SIGN_UP_URL } from "../../constants/data"
+
 export const SIGN_UP = 'SIGN_UP'
+export const LOG_IN = 'LOG_IN'
 
 export const signUp = (email, password) => {
     return async dispatch => {
@@ -34,6 +36,31 @@ export const signUp = (email, password) => {
                 type: "SIGN_UP_FAIL"
             })
             alert(error);
+        }
+    }
+}
+
+export const logIn = (email, password) => {
+    return async dispatch => {
+
+        try{
+            const response = await fetch(LOG_IN_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                
+                body: JSON.stringify({
+                    email,
+                    password,
+                })
+            })
+
+            const data = await response.json()
+            console.log('LOG IN DATA', data)
+
+        } catch (error){
+            console.log(error)
         }
     }
 }
