@@ -4,16 +4,16 @@ import { Feather } from '@expo/vector-icons';
 import FONTS from '../constants/Fonts';
 import * as ImagePicker from 'expo-image-picker'
 import { useDispatch, useSelector } from 'react-redux';
-import { loadImage, takeImage } from '../store/actions/profile.actions'
+import { loadImage, takeImage } from '../store/actions/auth.actions'
 
 
 const ProfileScreen = () => {
 
     const dispatch = useDispatch()
 
-    React.useEffect(() => {
-      dispatch( loadImage() )
-    }, [])
+    // React.useEffect(() => {
+    //   dispatch( loadImage() )
+    // }, [])
     
 
     const profileImage = useSelector(state => state.profile.profileImage)

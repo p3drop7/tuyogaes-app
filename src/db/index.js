@@ -1,12 +1,12 @@
 import * as SQLite from 'expo-sqlite'
 
-const db = SQLite.openDatabase('profileImage.db')
+const db = SQLite.openDatabase('profile.db')
 
 export const init = () => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS profileImage (id INTEGER PRIMARY KEY NOT NULL, image TEXT NOT NULL);',
+                'CREATE TABLE IF NOT EXISTS profile (id INTEGER PRIMARY KEY, userId TEXT, userName TEXT, userSurname TEXT, userEmail TEXT, image TEXT);',
                 [],
                 () => {
                     resolve();
@@ -20,12 +20,12 @@ export const init = () => {
     return promise;
 }
 
-export const insertProfileImage = (image) => {
+export const insertProfile = (userId, userName, userSurname, userEmail, image) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                `INSERT INTO profileImage (image) VALUES (?);`,
-                [image],
+                `INSERT INTO profile (userId, userName, userSurname, userEmail, image) VALUES (?, ?, ?, ?, ?);`,
+                [userId, userName, userSurname, userEmail, image],
                 (_, result) => {
                     resolve(result);
                 },
@@ -38,11 +38,11 @@ export const insertProfileImage = (image) => {
     return promise;
 }
 
-export const fetchProfileImage = () => {
+export const fetchProfile = () => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'SELECT * FROM profileImage',
+                'SELECT * FROM profile',
                 [],
                 (_, result) => {
                     resolve(result);

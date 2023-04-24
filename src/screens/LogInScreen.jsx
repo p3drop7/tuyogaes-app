@@ -14,7 +14,7 @@ const LogInScreen = ({navigation}) => {
     const [password, setPassword] = React.useState('')
 
     const onHandleLogIn =()=>{
-        dispatch( logIn( email, password))
+        dispatch( logIn( email, password ))
     }
     
   return (

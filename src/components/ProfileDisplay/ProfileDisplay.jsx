@@ -2,17 +2,17 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import COLORS from '../../constants/Colors'
 import FONTS from '../../constants/Fonts';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadImage } from '../../store/actions/profile.actions';
+import { useSelector } from 'react-redux';
+// import { loadImage } from '../../store/actions/profile.actions';
 
 // User's profile display
 const ProfileDisplay = () => {
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  React.useEffect(() => {
-    dispatch( loadImage() )
-  }, [])
+  // React.useEffect(() => {
+  //   dispatch( loadImage() )
+  // }, [])
 
   const profileImage = useSelector(state => state.profile.profileImage )
 

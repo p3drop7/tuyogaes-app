@@ -13,7 +13,7 @@ const RegisterScreen = ({navigation}) => {
     const [password, setPassword] = React.useState('')
 
     const onHandleRegister =()=>{
-        dispatch( signUp(email, password) )
+      dispatch( signUp(email, password) )
     }
 
   return (

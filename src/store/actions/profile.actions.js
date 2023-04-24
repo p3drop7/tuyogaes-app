@@ -53,9 +53,3 @@ export const loadImage = () => {
         }
     }
 }
-
-// Take and save user ID when registering or loggin to SQLite
-// export const takeUserId =(userId)=> ({
-//     type: TAKE_USERID,
-//     userId
-// })
