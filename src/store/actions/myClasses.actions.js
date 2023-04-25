@@ -1,9 +1,11 @@
+import { ReactReduxContext } from 'react-redux'
 import { API_URL } from '../../constants/data'
 
 export const ADD_CLASS = 'ADD_CLASS'
 export const SELECT_CLASS = 'SELECT_CLASS'
 export const DELETE_CLASS = 'DELETE_CLASS'
-export const ADD_FB = 'ADD_TO_FB'
+export const LOAD_FIREBASE = 'LOAD_FIREBASE'
+export const UPDATE_FIREBASE = 'UPDATE_FIREBASE'
 
 export const addClass = (selectedClass) => ({
     type: ADD_CLASS,
@@ -20,31 +22,79 @@ export const deleteClass = (selectedClass) => ({
     selectedClass
 })
 
-// Funtion to add a class to Firebase
-export const addToFB = (myClasses) => {
+// Function to load the classes from Firebase
+export const loadFirebase = (userId) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(API_URL + "myClasses/" + userId + ".json", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const result = await response.json();
+
+      if( result === null ) {
+        dispatch({
+            type: LOAD_FIREBASE,
+            classesInFB: [],
+          });
+
+      } else if ( result.classes === null || result.classes === undefined ) {
+          dispatch({
+              type: LOAD_FIREBASE,
+              classesInFB: [],
+            });
+
+      } else {
+        dispatch({
+            type: LOAD_FIREBASE,
+            classesInFB: result.classes,
+          });
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// Funtion to modify classes to Firebase
+export const updateFirebase = (myClasses, userEmail, userId) => {
     return async dispatch => {
         try {
-            
-            const response = await fetch(API_URL + 'myClasses.json', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    date: new Date(),
-                    classes: myClasses
-                }),
-            });
+          const response = await fetch(
+            API_URL + "myClasses/" + userId + ".json", {
+              method: 'PUT',
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                date: new Date(),
+                classes: myClasses,
+                user: userEmail
+              })
+            }
+          );
 
-            const result = await response.json();
+          const result = await response.json();
 
+          if( result.classes === null || result.classes === undefined ) {
             dispatch({
-                type: ADD_FB,
-                classesInFB: result
+              type: UPDATE_FIREBASE,
+              classesInFB: [],
+            })
+          
+          } else {
+            dispatch({
+              type: UPDATE_FIREBASE,
+              classesInFB: result.classes,
             });
+          }
 
         } catch (error) {
-            console.error(error)
+          console.error(error);
         }
     }
 }

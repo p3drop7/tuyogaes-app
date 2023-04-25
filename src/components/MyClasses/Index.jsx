@@ -5,9 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import FONTS from "../../constants/Fonts";
 import ClassItem from "./ClassItem";
 import DeleteModal from "./DeleteModal";
-import { deleteClass , selectClass, addToFB } from '../../store/actions/myClasses.actions';
+import { deleteClass , loadFirebase, selectClass, updateFirebase } from '../../store/actions/myClasses.actions';
 
 const MyClasses = () => {
+
+  const dispatch = useDispatch()
 
   // Item select to pass it to modal pop-up
   const [itemSelected, setItemSelected] = useState({});
@@ -20,8 +22,11 @@ const MyClasses = () => {
 
   // Selected class to show on pop-up modal
   const selectedClass = useSelector( state => state.myClasses.selectedClass )
-  const dispatch = useDispatch()
 
+  // User's profile email
+  const userEmail = useSelector( state => state.auth.userEmail )
+  const userId = useSelector( state => state.auth.userId )
+  
   // Function to open Modal
   const onHandlerModal = (key) => {
     let currentItem = myClasses.filter((item) => item.key === key)[0];
@@ -36,22 +41,26 @@ const MyClasses = () => {
     setModalVisible(!modalVisible);
   };
 
+  React.useEffect(() => {
+    dispatch( loadFirebase(userId) )
+  }, [])
+  
 
   return (
     <>
       <Text style={styles.title}>Mis próximas clases</Text>
 
       <Button title="agregar" onPress={() =>{
-          dispatch(addToFB(myClasses))
+          dispatch( updateFirebase(myClasses, userEmail, userId))
         }
       } />
 
       <View style={styles.container}>
 
-        { myClasses.length === 0 ? (
+        {/* { myClasses === null || myClasses.length === 0 ? ( */}
           <Text style={styles.emptyList}>No has agregado clases</Text>
 
-        ) : (
+        {/* ) : ( */}
           <View style={styles.listContainer}>
             <FlatList
               contentContainerStyle={styles.contentContainer}
@@ -67,7 +76,7 @@ const MyClasses = () => {
               }}
             />
           </View>
-        )}
+        {/* )} */}
 
       </View>
 

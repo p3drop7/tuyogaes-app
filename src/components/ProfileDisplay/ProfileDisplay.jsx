@@ -8,13 +8,7 @@ import { useSelector } from 'react-redux';
 // User's profile display
 const ProfileDisplay = () => {
 
-  // const dispatch = useDispatch()
-
-  // React.useEffect(() => {
-  //   dispatch( loadImage() )
-  // }, [])
-
-  const profileImage = useSelector(state => state.profile.profileImage )
+  const profileImage = useSelector(state => state.auth.profileImage )
 
   return (
     <View style={styles.container}>

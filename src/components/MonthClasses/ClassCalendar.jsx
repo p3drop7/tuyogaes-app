@@ -11,32 +11,6 @@ const ClassCalendar = ({classes, onSelectDay}) => {
     calendarClasses[item.dateString] = { selected: true, selectedColor: COLORS.darkGreen }
   })
   
-  // dates[item.dateString] = { selected: true, selectedColor: COLORS.darkGreen }
-  // console.log('DATESTRINGS', dates)
-
-  // const monthNow = new Date().getMonth() +1
-  // const monthString = monthNow.toString()
-  // const yearNow = new Date().getFullYear()
-  // const yearString = yearNow.toString()
-
-  // const dateNow = monthString + yearString
- 
-  // classes.find(item => item.)
-  
-  // console.log(classes.forEach(element => {
-  //   console.log()
-  // }))
-
-  
-  // console.log(yearNow)
-  // console.log(yearNow)
-
-  // classes.map(item => {
-  //   item.monthClasses
-  // console.log(item)
-  // calendarClasses[item.dateString] = { selected: true, selectedColor: COLORS.darkGreen }
-  // })
-  
   LocaleConfig.locales['es'] = {
     monthNames: [
       'Enero',

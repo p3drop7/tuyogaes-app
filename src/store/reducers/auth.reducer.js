@@ -15,14 +15,17 @@ const AuthReducer = ( state = initialState, action) => {
       case SIGN_UP:
         return {
           ...state,
-          token: action.token,
-          userId: action.userId,
+          token: action.payload.token,
+          userId: action.payload.userId,
+          userEmail: action.payload.userEmail
         };
 
       case LOG_IN:
         return {
           ...state,
-          userId: action.userId,
+          token: action.payload.token,
+          userId: action.payload.userId,
+          userEmail: action.payload.userEmail
         };
 
       case TAKE_IMAGE:

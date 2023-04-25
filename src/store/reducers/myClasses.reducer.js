@@ -1,11 +1,8 @@
-import { ADD_CLASS, DELETE_CLASS } from '../actions/myClasses.actions'
-import { SELECT_CLASS } from '../actions/myClasses.actions'
-import { ADD_FB } from '../actions/myClasses.actions'
+import { ADD_CLASS, DELETE_CLASS, LOAD_FIREBASE, SELECT_CLASS, UPDATE_FIREBASE } from '../actions/myClasses.actions'
 
 const initialState = {
     myClasses: [],
     selectedClass: null,
-    classesInFB: null
 }
 
 const MyClassesReducer = ( state = initialState, action) => {
@@ -33,17 +30,25 @@ const MyClassesReducer = ( state = initialState, action) => {
             const newMyClasses = state.myClasses.filter((item) => {
                 return item.key !== action.selectedClass.key
             })
+
+            
             return {
                 ...state,
                 myClasses: newMyClasses
             }
 
-        // Add class list from dashboard screen list (state.myClasses) to Firebase
-        case ADD_FB:
-            console.log('Added:', action.classesInFB)
+        // Load classes from Firebase
+        case LOAD_FIREBASE:
             return {
                 ...state,
-                classesInFB: action.classesInFB
+                myClasses: action.classesInFB
+            }
+
+        // Add class list from dashboard screen list (state.myClasses) to Firebase
+        case UPDATE_FIREBASE:
+            return {
+                ...state,
+                myClasses: action.classesInFB
             }
 
         default:

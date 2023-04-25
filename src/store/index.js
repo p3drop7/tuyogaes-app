@@ -12,13 +12,11 @@ const persistConfig = {
 
 import ClassesReducer from './reducers/classes.reducer'
 import MyClassesReducer from './reducers/myClasses.reducer';
-import ProfileReducer from './reducers/profile.reducer';
 import AuthReducer from './reducers/auth.reducer';
 
 const rootReducer = combineReducers({
     classes: ClassesReducer,
     myClasses: MyClassesReducer,
-    profile: ProfileReducer,
     auth: AuthReducer
 })
 

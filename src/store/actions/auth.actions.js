@@ -26,7 +26,6 @@ export const signUp = (email, password) => {
             })
 
             const data = await response.json()
-            console.log('DATA', data)
 
             if( !response.ok ){
                 throw new Error('¡Ocurrió un error inesperado!')
@@ -34,8 +33,12 @@ export const signUp = (email, password) => {
 
             dispatch({
                 type: SIGN_UP,
-                token: data.idToken,
-                userId: data.localId 
+                payload: {
+                    token: data.idToken,
+                    userId: data.localId,
+                    userEmail: data.email
+                }
+                
             })
 
         } catch(error) {
@@ -67,7 +70,11 @@ export const logIn = (email, password) => {
             
             dispatch({
                 type: LOG_IN,
-                userId: data.localId
+                payload: {
+                    token: data.idToken,
+                    userId: data.localId,
+                    userEmail: data.email
+                }
             })
 
         } catch (error){
@@ -93,9 +100,6 @@ export const takeImage = (imageUri) => {
             throw error
         }
 
-        // SQLite persistence
-        // const dbResult = await insertProfile('', '', '', '', '', Path)
-
         dispatch({
             type: TAKE_IMAGE,
             payload: {
@@ -104,23 +108,3 @@ export const takeImage = (imageUri) => {
         })
     }
 }
-
-// Load Profile Image from SQLite
-// export const loadImage = () => {
-//     return async dispatch => {
-//         try {
-
-            // const dbResult = await fetchProfile()
-            // console.log(dbResult)
-
-            // dispatch({
-            //     type: LOAD_IMAGE, 
-            //     payload: {
-            //         profileImage: dbResult.image.rows._array}
-            // })
-
-//         } catch (error) {
-//             throw error
-//         }
-//     }
-// }

@@ -11,12 +11,7 @@ const ProfileScreen = () => {
 
     const dispatch = useDispatch()
 
-    // React.useEffect(() => {
-    //   dispatch( loadImage() )
-    // }, [])
-    
-
-    const profileImage = useSelector(state => state.profile.profileImage)
+    const profileImage = useSelector(state => state.auth.profileImage)
 
     const verifyPremissions = async ()=>{
         const { status } = await ImagePicker.requestCameraPermissionsAsync()
