@@ -13,9 +13,16 @@ const MyClassesReducer = ( state = initialState, action) => {
         case ADD_CLASS:
             if( !state.myClasses.some( item => item.key === action.selectedClass.key)) {
                 
+                const newList = [
+                    ...state.myClasses,
+                    action.selectedClass
+                ]
+                newList.sort((a, b) => (a.key > b.key) ? 1 : -1)
+                console.log(newList)
+
                 return {
                     ...state,
-                    myClasses: [ ...state.myClasses, action.selectedClass ]
+                    myClasses: newList
                 }
             }
 
