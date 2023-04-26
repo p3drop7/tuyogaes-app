@@ -57,10 +57,10 @@ const MyClasses = () => {
 
       <View style={styles.container}>
 
-        {/* { myClasses === null || myClasses.length === 0 ? ( */}
+        { myClasses === null || myClasses.length === 0 ? (
           <Text style={styles.emptyList}>No has agregado clases</Text>
 
-        {/* ) : ( */}
+        ) : (
           <View style={styles.listContainer}>
             <FlatList
               contentContainerStyle={styles.contentContainer}
@@ -76,7 +76,7 @@ const MyClasses = () => {
               }}
             />
           </View>
-        {/* )} */}
+        )}
 
       </View>
 
