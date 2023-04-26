@@ -62,6 +62,7 @@ export const loadFirebase = (userId) => {
 
 // Funtion to modify classes to Firebase
 export const updateFirebase = (myClasses, userEmail, userId) => {
+  
     return async dispatch => {
         try {
           const response = await fetch(
@@ -80,6 +81,7 @@ export const updateFirebase = (myClasses, userEmail, userId) => {
 
           const result = await response.json();
 
+         
           if( result.classes === null || result.classes === undefined ) {
             dispatch({
               type: UPDATE_FIREBASE,

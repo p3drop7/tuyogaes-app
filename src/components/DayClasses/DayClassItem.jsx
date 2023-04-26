@@ -5,7 +5,7 @@ import COLORS from "../../constants/Colors";
 import FONTS from "../../constants/Fonts";
 
 const DayClassItem = ({ classItem, modalHandler }) => {
-
+  
   return (
     <ShadowBox style={styles.classContainer}>
       <Pressable

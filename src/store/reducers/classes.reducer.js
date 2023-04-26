@@ -23,9 +23,10 @@ const ClassesReducer = ( state = initialState, action) => {
 
             if(state.classes !== null){
                 filtered = state.classes.monthClasses.find(item => {
-                    return item.dateString = action.daySelected
+                    return item.day === action.daySelected.day
                 })
             }
+            
             return {
                 ...state,
                 filteredClasses: filtered

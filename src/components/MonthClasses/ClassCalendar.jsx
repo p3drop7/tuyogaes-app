@@ -36,8 +36,8 @@ const ClassCalendar = ({classes, onSelectDay}) => {
 
   return (
       <Calendar
-        onDayPress={(day) => {
-          onSelectDay(day)
+        onDayPress={(date) => {
+          onSelectDay(date)
         }}
         
         markedDates={calendarClasses}

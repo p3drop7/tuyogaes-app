@@ -12,6 +12,7 @@ const MyClassesReducer = ( state = initialState, action) => {
         // Add a class to state.myClasses and show it on deshboard screen list
         case ADD_CLASS:
             if( !state.myClasses.some( item => item.key === action.selectedClass.key)) {
+                
                 return {
                     ...state,
                     myClasses: [ ...state.myClasses, action.selectedClass ]
@@ -48,7 +49,6 @@ const MyClassesReducer = ( state = initialState, action) => {
         case UPDATE_FIREBASE:
             return {
                 ...state,
-                myClasses: action.classesInFB
             }
 
         default:

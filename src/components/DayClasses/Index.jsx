@@ -5,13 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 import FONTS from "../../constants/Fonts";
 import DayClassItem from "./DayClassItem";
 import AddModal from "./AddModal";
-import { addClass , selectClass } from "../../store/actions/myClasses.actions";
+import { addClass , selectClass, updateFirebase } from "../../store/actions/myClasses.actions";
 
 const DayClasses = ({route}) => {
   
   // Classes filtered on day selected 
   const filteredClasses = useSelector( state => state.classes.filteredClasses )
   const classes = useSelector( state => state.classes.classes)
+
+  // MyClasses and user details to add to Firebase
+  const myClasses = useSelector( state => state.myClasses.myClasses )
+  const userEmail = useSelector( state => state.auth.userEmail )
+  const userId = useSelector( state => state.auth.userId )
 
   // Selected class to be added to pop-up modal, then to state.myClasses
   const selectedClass = useSelector( state => state.myClasses.selectedClass )
@@ -26,7 +31,6 @@ const DayClasses = ({route}) => {
 
   // Function to open modal
   const modalHandler =(classItem)=>{
-    
     const newClassItem = {
       ...classItem, 
       dayString: filteredClasses.dayString,

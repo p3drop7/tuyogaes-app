@@ -44,16 +44,16 @@ const MyClasses = () => {
   React.useEffect(() => {
     dispatch( loadFirebase(userId) )
   }, [])
+
+  React.useEffect(() => {
+    dispatch( updateFirebase(myClasses, userEmail, userId) )
+  }, [myClasses])
+  
   
 
   return (
     <>
       <Text style={styles.title}>Mis próximas clases</Text>
-
-      <Button title="agregar" onPress={() =>{
-          dispatch( updateFirebase(myClasses, userEmail, userId))
-        }
-      } />
 
       <View style={styles.container}>
 
