@@ -18,7 +18,6 @@ const MyClassesReducer = ( state = initialState, action) => {
                     action.selectedClass
                 ]
                 newList.sort((a, b) => (a.key > b.key) ? 1 : -1)
-                console.log(newList)
 
                 return {
                     ...state,
