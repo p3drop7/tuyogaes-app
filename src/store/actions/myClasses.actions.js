@@ -1,4 +1,3 @@
-import { ReactReduxContext } from 'react-redux'
 import { API_URL } from '../../constants/data'
 
 export const ADD_CLASS = 'ADD_CLASS'
@@ -91,7 +90,7 @@ export const updateFirebase = (myClasses, userEmail, userId) => {
           } else {
             dispatch({
               type: UPDATE_FIREBASE,
-              classesInFB: result.classes,
+              classesInFB: result.classes
             });
           }
 

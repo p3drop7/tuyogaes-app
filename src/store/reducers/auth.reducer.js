@@ -1,10 +1,9 @@
-import { LOG_IN, SIGN_UP, TAKE_IMAGE, LOAD_IMAGE } from "../actions/auth.actions"
+import { LOG_IN, SIGN_UP, TAKE_IMAGE, LOAD_IMAGE, SAVE_NAME, LOAD_USERDATA } from "../actions/auth.actions"
 
 const initialState = {
     token: null,
     userId: null,
     userName: null,
-    userSurname: null,
     userEmail: null,
     profileImage: null
 }
@@ -28,18 +27,24 @@ const AuthReducer = ( state = initialState, action) => {
           userEmail: action.payload.userEmail
         };
 
+      case SAVE_NAME:
+        return {
+          ...state,
+          userName: action.name
+        }
+
       case TAKE_IMAGE:
         return {
           ...state,
           profileImage: action.payload.imagePath,
         };
 
-      case LOAD_IMAGE:
-        const pic = action.payload.profileImage;
+      case LOAD_USERDATA:
         return {
           ...state,
-          profileImage: pic[pic.length - 1].image,
-        };
+          userName: action.userData.userName,
+          userEmail: action.userData.userEmail
+        }
 
       default:
         return state;

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { FlatList, Button, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 import FONTS from "../../constants/Fonts";
 import ClassItem from "./ClassItem";
 import DeleteModal from "./DeleteModal";
 import { deleteClass , loadFirebase, selectClass, updateFirebase } from '../../store/actions/myClasses.actions';
+import { loadUserData } from "../../store/actions/auth.actions";
 
 const MyClasses = () => {
 
@@ -41,16 +42,21 @@ const MyClasses = () => {
     setModalVisible(!modalVisible);
   };
 
+  // When the App is loaded and the component is rendered, loadFirebase() calls and brings user's classes by its userId
   React.useEffect(() => {
     dispatch( loadFirebase(userId) )
   }, [])
 
+  // Update user's classes in Firebase when myClasses list state changes
   React.useEffect(() => {
     dispatch( updateFirebase(myClasses, userEmail, userId) )
   }, [myClasses])
-  
-  
 
+  // Load user's data from Firebase when component is rendered
+  React.useEffect(() => {
+    dispatch( loadUserData(userId) )
+  }, [])
+  
   return (
     <>
       <Text style={styles.title}>Mis próximas clases</Text>

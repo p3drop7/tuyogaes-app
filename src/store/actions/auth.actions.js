@@ -1,13 +1,19 @@
-// SQLite
 import * as FileSystem from 'expo-file-system'
-// import { insertProfile, fetchProfile } from '../../db'
-
-import { LOG_IN_URL, SIGN_UP_URL } from "../../constants/data"
+import { API_URL, LOG_IN_URL, SIGN_UP_URL } from "../../constants/data"
 
 export const SIGN_UP = 'SIGN_UP'
 export const LOG_IN = 'LOG_IN'
+
+// User's name
+export const SAVE_NAME = 'SAVE_NAME'
+
+// User's profile picture
 export const TAKE_IMAGE = 'TAKE_IMAGE'
-export const LOAD_IMAGE = 'LOAD_IMAGE'
+// export const LOAD_IMAGE = 'LOAD_IMAGE'
+
+// Save/load user's data to/from Firebase if it exists
+export const SAVE_USERDATA = 'SAVE_USERDATA'
+export const LOAD_USERDATA = 'LOAD_USERDATA'
 
 
 export const signUp = (email, password) => {
@@ -83,6 +89,11 @@ export const logIn = (email, password) => {
     }
 }
 
+export const saveName = (name) => ({
+    type: SAVE_NAME,
+    name
+})
+
 export const takeImage = (imageUri) => {
     return async dispatch => {
 
@@ -106,5 +117,48 @@ export const takeImage = (imageUri) => {
                 imagePath: Path
             }
         })
+    }
+}
+
+export const saveUserData = (userData) => {
+    return async dispatch => {
+        try {
+            const response = await fetch(API_URL + `users/${userData.userId}.json`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userEmail: userData.userEmail,
+                    userName: userData.userName,
+                })
+            })
+
+        } catch(error){
+            console.log(error)
+        }
+    }
+}
+
+export const loadUserData = (userId) =>{
+    return async dispatch =>{
+        try{
+            const response = await fetch(API_URL + `users/${userId}.json`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            
+            const resData = await response.json()
+
+            dispatch({
+                type: LOAD_USERDATA,
+                userData: resData
+            })
+
+        } catch(error){
+            console.log(error)
+        }
     }
 }

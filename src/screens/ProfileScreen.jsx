@@ -1,17 +1,20 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, Pressable, Alert } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable, Alert, TextInput } from 'react-native'
 import { Feather } from '@expo/vector-icons';
-import FONTS from '../constants/Fonts';
 import * as ImagePicker from 'expo-image-picker'
 import { useDispatch, useSelector } from 'react-redux';
-import { loadImage, takeImage } from '../store/actions/auth.actions'
-
+import { saveName, saveUserData, takeImage } from '../store/actions/auth.actions'
+import FONTS from '../constants/Fonts';
+import COLORS from '../constants/Colors';
 
 const ProfileScreen = () => {
 
     const dispatch = useDispatch()
 
-    const profileImage = useSelector(state => state.auth.profileImage)
+    const userData = useSelector(state => state.auth)
+
+    const [inputCondRender, setInputCondRender] = React.useState(false)
+    const [inputUserName, setInputUserName] = React.useState('')
 
     const verifyPremissions = async ()=>{
         const { status } = await ImagePicker.requestCameraPermissionsAsync()
@@ -36,13 +39,58 @@ const ProfileScreen = () => {
         dispatch( takeImage(image.assets[0].uri) )
     }
 
+    React.useEffect(() => {
+      dispatch( saveUserData(userData) )
+    }, [userData])
+    
+
   return (
     <View style={styles.container}>
       <Text style={styles.profileTitle}>Mi Perfil</Text>
 
       <View style={styles.profileContainer}>
-        <Text style={styles.profileText}>NAME</Text>
-        <Text style={styles.profileText}>EMAIL@EMAIL.COM</Text>
+        <View style={styles.nameContainer}>
+          <Pressable
+            style={styles.pressableNameContainer}
+            onPress={() => {
+              setInputCondRender(true);
+            }}
+          >
+            {inputCondRender === false ? (
+              userData.userName === null ? (
+                <>
+                  <Text style={styles.profileText}>Agrega tu nombre aquí</Text>
+                  <Feather style={styles.nameIcon} name="edit-2" size={18} color="black" />
+                </>
+              ) : (
+                <>
+                  <Text style={styles.profileText}>Nombre: {userData.userName}</Text>
+                  <Feather style={styles.nameIcon} name="edit-2" size={18} color="black" />
+                </>
+              )
+            ) : (
+              <View style={styles.textInputContainer}>
+                <TextInput
+                  style={styles.nameInput}
+                  onChangeText={setInputUserName}
+                  keyboardType="default"
+                  autoCapitalize="words"
+                />
+                <Pressable
+                  style={styles.nameButton}
+                  onPress={() => {
+                    dispatch(saveName(inputUserName));
+                    setInputCondRender(false);
+                  }}
+                >
+                  <Text style={styles.nameButtonText} >Guardar</Text>
+                </Pressable>
+              </View>
+            )}
+          </Pressable>
+        </View>
+
+        <Text style={styles.profileText}>Email: {userData.userEmail}</Text>
 
         <Pressable
           style={styles.profileImageContainer}
@@ -50,15 +98,15 @@ const ProfileScreen = () => {
             takeImageHandler();
           }}
         >
-          {profileImage === null ? (
+          {userData.profileImage === null ? (
             <Image
               source={require("../../assets/images/user.png")}
               style={styles.image}
             />
           ) : (
-            <Image 
-                source={{ uri: profileImage }} 
-                style={styles.image} 
+            <Image
+              source={{ uri: userData.profileImage }}
+              style={styles.image}
             />
           )}
 
@@ -89,10 +137,50 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 
+    nameContainer: {
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+
+    pressableNameContainer: {
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+
     profileText: {
         fontFamily: FONTS.comfortaaSemiBold,
         fontSize: 15,
         marginVertical: 5
+    },
+
+    nameIcon:{
+      marginLeft: 10,
+    },
+
+    textInputContainer: {
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+
+    nameInput: {
+      width: 130,
+      height: 32,
+      marginRight: 10,
+      backgroundColor: COLORS.lightGreen,
+      borderBottomColor: COLORS.lightGray,
+      borderBottomWidth: 2
+    },
+
+    nameButton: {
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      backgroundColor: COLORS.darkGreen,
+      borderRadius: 10,
+    },
+
+    nameButtonText: {
+      fontFamily: FONTS.comfortaaSemiBold,
+      color: 'white'
     },
 
     profileImageContainer: {

@@ -38,7 +38,6 @@ const MyClassesReducer = ( state = initialState, action) => {
                 return item.key !== action.selectedClass.key
             })
 
-            
             return {
                 ...state,
                 myClasses: newMyClasses

@@ -3,12 +3,11 @@ import React from 'react'
 import COLORS from '../../constants/Colors'
 import FONTS from '../../constants/Fonts';
 import { useSelector } from 'react-redux';
-// import { loadImage } from '../../store/actions/profile.actions';
 
 // User's profile display
 const ProfileDisplay = () => {
 
-  const profileImage = useSelector(state => state.auth.profileImage )
+  const userData = useSelector(state => state.auth )
 
   return (
     <View style={styles.container}>
@@ -18,19 +17,18 @@ const ProfileDisplay = () => {
           style={styles.image}
         />
         <View style={styles.nameContainer}>
-          <Text style={styles.name}>Pedro</Text>
-          <Text style={styles.name}>Palencia</Text>
+          <Text style={styles.name}>{userData.userName}</Text>
         </View>
       </View>
 
-      {profileImage === null ? (
+      { userData.profileImage === null ? (
         <Image
           source={require("../../../assets/images/user.png")}
           style={styles.userImage}
         />
       ) : (
         <Image 
-          source={{ uri: profileImage }} 
+          source={{ uri: userData.profileImage }} 
           style={styles.userImage} 
         />
       )}

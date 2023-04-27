@@ -1,4 +1,5 @@
 import { API_URL } from '../../constants/data'
+
 export const GET_CLASSES = 'GET_CLASSES'
 export const FILTER_DAY_CLASSES = 'FILTER_DAY_CLASSES'
 
