@@ -1,13 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Ionicons } from '@expo/vector-icons';
 import FONTS from "../../constants/Fonts";
 import DayClassItem from "./DayClassItem";
 import AddModal from "./AddModal";
-import { addClass , selectClass, updateFirebase } from "../../store/actions/myClasses.actions";
+import { addClass , selectClass } from "../../store/actions/myClasses.actions";
+import COLORS from "../../constants/Colors";
 
-const DayClasses = ({route}) => {
+const DayClasses = ({navigation, route}) => {
   
   // Classes filtered on day selected 
   const filteredClasses = useSelector( state => state.classes.filteredClasses )
@@ -53,7 +54,12 @@ const DayClasses = ({route}) => {
   return (
     <View style={styles.dayClassesContainer}>
       <View style={styles.dateContainer}>
-        <Text style={styles.dateText}>{classes.monthString} {daySelected.day} ({filteredClasses.dayString}) </Text>
+        <Ionicons name="chevron-back-outline" size={30} color="green" onPress={()=>{
+          navigation.navigate('MonthClassesScreen')
+        }}/>
+        <View style={styles.dateTextContainer}>
+          <Text style={styles.dateText}>{classes.monthString} {daySelected.day} ({filteredClasses.dayString})</Text>
+        </View>
       </View>
 
       <Text style={styles.selectText}>Selecciona una clase:</Text>
@@ -86,25 +92,32 @@ const styles = StyleSheet.create({
   dayClassesContainer: {
     width: "100%",
     marginTop: 10,
-    alignItems: "center",
+    alignItems: "center"
   },
 
   dateContainer: {
     width: "100%",
+    paddingRight: '6%',
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
     alignItems: "center",
+  },
+
+  dateTextContainer: {
+    width: '80%',
+    alignItems: 'center',
   },
 
   dateText: {
     fontFamily: FONTS.comfortaaBold,
     fontSize: 20,
+    color: COLORS.darkGreen
   },
 
   selectText: {
-    marginTop: 10,
+    marginVertical: 10,
     fontFamily: FONTS.comfortaaBold,
-    fontSize: 15,
+    fontSize: 16,
   },
 
   classItemsContainer: {

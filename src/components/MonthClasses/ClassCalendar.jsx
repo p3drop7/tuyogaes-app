@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Calendar, LocaleConfig } from 'react-native-calendars'
+
 import COLORS from '../../constants/Colors';
 
 const ClassCalendar = ({classes, onSelectDay}) => {
@@ -36,6 +37,7 @@ const ClassCalendar = ({classes, onSelectDay}) => {
 
   return (
       <Calendar
+      style={styles.calendarContainer}
         onDayPress={(date) => {
           onSelectDay(date)
         }}
@@ -65,4 +67,12 @@ const ClassCalendar = ({classes, onSelectDay}) => {
 
 export default ClassCalendar
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  calendarContainer: {
+    borderStyle: 'solid',
+    borderTopWidth: 5,
+    borderBottomWidth: 5,
+    borderTopColor: COLORS.darkGreen,
+    borderBottomColor: COLORS.darkGreen
+  }
+})

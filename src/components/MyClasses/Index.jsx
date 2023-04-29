@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View, Dimensions } from "react-native";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import FONTS from "../../constants/Fonts";
@@ -7,6 +8,7 @@ import ClassItem from "./ClassItem";
 import DeleteModal from "./DeleteModal";
 import { deleteClass , loadFirebase, selectClass, updateFirebase } from '../../store/actions/myClasses.actions';
 import { loadUserData } from "../../store/actions/auth.actions";
+import COLORS from "../../constants/Colors";
 
 const MyClasses = () => {
 
@@ -64,12 +66,13 @@ const MyClasses = () => {
       <View style={styles.container}>
 
         { myClasses === null || myClasses.length === 0 ? (
-          <Text style={styles.emptyList}>No has agregado clases</Text>
+          <Text style={styles.emptyList}>Aún no has agregado clases</Text>
 
         ) : (
           <View style={styles.listContainer}>
             <FlatList
               contentContainerStyle={styles.contentContainer}
+              persistentScrollbar={true}
               data={myClasses}
               keyExtractor={(item) => item.key}
               renderItem={(itemData) => {
@@ -100,27 +103,31 @@ export default MyClasses;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: "center",
   },
 
   emptyList: {
     marginVertical: 100,
-    color: "gray",
+    color: COLORS.darkGray,
+    fontFamily: FONTS.comfortaaLight
   },
 
   title: {
     marginTop: 20,
-    fontSize: 25,
+    fontSize: Dimensions.get('screen').width * 0.06,
     textAlign: "center",
     fontFamily: FONTS.comfortaaBold,
+    color: COLORS.darkGray
   },
 
   listContainer: {
     width: "90%",
-    marginBottom: 300
+    marginBottom: 0
   },
 
   contentContainer: {
     alignItems: "center",
+    marginBottom: 300
   },
 });

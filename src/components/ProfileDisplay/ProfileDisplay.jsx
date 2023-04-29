@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import COLORS from '../../constants/Colors'
 import FONTS from '../../constants/Fonts';
@@ -12,27 +12,32 @@ const ProfileDisplay = () => {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <Image
-          source={require("../../../assets/images/anahata.png")}
-          style={styles.image}
-        />
-        <View style={styles.nameContainer}>
-          <Text style={styles.name}>{userData.userName}</Text>
+        <View style={styles.titleContainer}>
+          <Image
+            source={require("../../../assets/images/anahata.png")}
+            style={styles.image}
+          />
+          <Text style={styles.title}>TuYoga.Es</Text>
         </View>
+
+        {
+          !userData.userName
+            ? <Text style={styles.noName}>Agrega tu nombre en "Mi Perfil"</Text>
+            : <Text style={styles.name}>{userData.userName}</Text>
+        }
       </View>
 
-      { userData.profileImage === null ? (
+      {userData.profileImage === null ? (
         <Image
           source={require("../../../assets/images/user.png")}
           style={styles.userImage}
         />
       ) : (
-        <Image 
-          source={{ uri: userData.profileImage }} 
-          style={styles.userImage} 
+        <Image
+          source={{ uri: userData.profileImage }}
+          style={styles.userImage}
         />
       )}
-
     </View>
   );
 }
@@ -47,34 +52,49 @@ const styles = StyleSheet.create({
 
     innerContainer: {
       height: '90%',
-      flexDirection: 'row',
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
       paddingBottom: 30,
-      backgroundColor: COLORS.lightGreen,
+      backgroundColor: COLORS.darkGreen,
       borderBottomLeftRadius: 200,
-      borderBottomRightRadius: 200
+      borderBottomRightRadius: 200,
     },
 
-    nameContainer: {
-      alignItems: 'flex-start',
+    titleContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
       justifyContent: 'center',
       marginLeft: 15,
     },
 
+    title: {
+      marginLeft: 10,
+      fontFamily: FONTS.comfortaaBold,
+      fontSize: Dimensions.get('screen').width * 0.06,
+      color: COLORS.lightGreen
+    },
+
     image: {
-      height: 60,
-      width: 60,
+      width: Dimensions.get('screen').width * 0.1,
+      aspectRatio: 1/1
+    },
+
+    noName: {
+      fontFamily: FONTS.comfortaaLight,
+      fontSize: Dimensions.get('screen').width * 0.04,
+      color: COLORS.lightGreen
     },
 
     name: {
       fontFamily: FONTS.comfortaaBold,
-      fontSize: 25
+      fontSize: Dimensions.get('screen').width * 0.07,
+      color: COLORS.lightGreen
     },
 
     userImage: {
-      height: 80,
-      width: 80,
+      height: Dimensions.get('screen').width * 0.2,
+      aspectRatio: 1/1,
       backgroundColor: 'white',
       borderWidth: 4,
       borderColor: COLORS.darkGreen,
@@ -82,6 +102,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       alignSelf: 'center',
       position: 'relative',
-      top: -40
+      top: -37
     }
 })

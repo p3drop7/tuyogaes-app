@@ -8,9 +8,9 @@ const Stack = createNativeStackNavigator();
 
 const GetClassesNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="MonthClassesScreen">
+    <Stack.Navigator initialRouteName="MonthClassesScreen" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="MonthClassesScreen" component={MonthClassesScreen} />
-      <Stack.Screen name="DayClassesScreen" component={DayClassesScreen} />
+      <Stack.Screen name="DayClassesScreen" component={DayClassesScreen}/>
     </Stack.Navigator>
   );
 };

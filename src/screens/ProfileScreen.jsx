@@ -1,9 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, Pressable, Alert, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable, Alert, TextInput, Dimensions } from 'react-native'
 import { Feather } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker'
 import { useDispatch, useSelector } from 'react-redux';
-import { saveName, saveUserData, takeImage } from '../store/actions/auth.actions'
+import { logOut, saveName, saveUserData, takeImage } from '../store/actions/auth.actions'
 import FONTS from '../constants/Fonts';
 import COLORS from '../constants/Colors';
 
@@ -39,6 +39,10 @@ const ProfileScreen = () => {
         dispatch( takeImage(image.assets[0].uri) )
     }
 
+    const logOutHandler =()=> {
+      dispatch( logOut() )
+    }
+
     React.useEffect(() => {
       dispatch( saveUserData(userData) )
     }, [userData])
@@ -57,15 +61,15 @@ const ProfileScreen = () => {
             }}
           >
             {inputCondRender === false ? (
-              userData.userName === null ? (
+              !userData.userName ? (
                 <>
                   <Text style={styles.profileText}>Agrega tu nombre aquí</Text>
-                  <Feather style={styles.nameIcon} name="edit-2" size={18} color="black" />
+                  <Feather style={styles.nameIcon} name="edit-2" size={18} color="white" />
                 </>
               ) : (
                 <>
-                  <Text style={styles.profileText}>Nombre: {userData.userName}</Text>
-                  <Feather style={styles.nameIcon} name="edit-2" size={18} color="black" />
+                  <Text style={styles.profileText}><Text style={styles.dataTitle}>Nombre:</Text> {userData.userName}</Text>
+                  <Feather style={styles.nameIcon} name="edit-2" size={18} color="white" />
                 </>
               )
             ) : (
@@ -83,14 +87,14 @@ const ProfileScreen = () => {
                     setInputCondRender(false);
                   }}
                 >
-                  <Text style={styles.nameButtonText} >Guardar</Text>
+                  <Text style={styles.nameButtonText}>Guardar</Text>
                 </Pressable>
               </View>
             )}
           </Pressable>
         </View>
 
-        <Text style={styles.profileText}>Email: {userData.userEmail}</Text>
+        <Text style={styles.profileText}><Text style={styles.dataTitle}>Email:</Text> {userData.userEmail}</Text>
 
         <Pressable
           style={styles.profileImageContainer}
@@ -110,7 +114,11 @@ const ProfileScreen = () => {
             />
           )}
 
-          <Feather name="edit-2" size={24} color="black" />
+          <Feather name="edit-2" size={24} color="black" style={styles.imageIcon} />
+        </Pressable>
+
+        <Pressable onPress={()=>logOutHandler()}>
+          <Text style={styles.logOutText}>Cerrar Sesión</Text>
         </Pressable>
       </View>
     </View>
@@ -120,81 +128,104 @@ const ProfileScreen = () => {
 export default ProfileScreen
 
 const styles = StyleSheet.create({
-    container: {
-        height: '100%',
-        width: '100%',
-        alignItems: 'center'
-    },
+  container: {
+    height: '100%',
+    alignItems: "center",
+    backgroundColor: COLORS.darkGreen,
+  },
 
-    profileTitle: {
-        fontFamily: FONTS.comfortaaBold,
-        fontSize: 25,
-    },
+  profileTitle: {
+    marginTop: 10,
+    fontFamily: FONTS.comfortaaBold,
+    fontSize: 25,
+    color: COLORS.lightGreen,
+    fontSize: Dimensions.get('screen').width * 0.08
+  },
 
-    profileContainer: {
-        width: '100%',
-        padding: 20,
-        alignItems: 'center',
-    },
+  profileContainer: {
+    width: "100%",
+    padding: 20,
+    alignItems: "center",
+  },
 
-    nameContainer: {
-      flexDirection: 'row',
-      alignItems: 'center'
-    },
+  nameContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
 
-    pressableNameContainer: {
-      flexDirection: 'row',
-      alignItems: 'center'
-    },
+  pressableNameContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
 
-    profileText: {
-        fontFamily: FONTS.comfortaaSemiBold,
-        fontSize: 15,
-        marginVertical: 5
-    },
+  profileText: {
+    fontFamily: FONTS.comfortaaSemiBold,
+    fontSize: 15,
+    marginVertical: 5,
+    fontSize: Dimensions.get('screen').width * 0.05,
+  },
 
-    nameIcon:{
-      marginLeft: 10,
-    },
+  dataTitle: {
+    color: 'white'
+  },
 
-    textInputContainer: {
-      flexDirection: 'row',
-      alignItems: 'center'
-    },
+  nameIcon: {
+    marginLeft: 10,
+  },
 
-    nameInput: {
-      width: 130,
-      height: 32,
-      marginRight: 10,
-      backgroundColor: COLORS.lightGreen,
-      borderBottomColor: COLORS.lightGray,
-      borderBottomWidth: 2
-    },
+  textInputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
 
-    nameButton: {
-      paddingHorizontal: 12,
-      paddingVertical: 8,
-      backgroundColor: COLORS.darkGreen,
-      borderRadius: 10,
-    },
+  nameInput: {
+    width: 130,
+    height: 32,
+    marginRight: 10,
+    backgroundColor: COLORS.lightGreen,
+    borderBottomColor: COLORS.lightGray,
+    borderBottomWidth: 2,
+  },
 
-    nameButtonText: {
-      fontFamily: FONTS.comfortaaSemiBold,
-      color: 'white'
-    },
+  nameButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    backgroundColor: COLORS.darkGreen,
+    borderRadius: 10,
+  },
 
-    profileImageContainer: {
-        height: '70%',
-        width: '100%',
-        marginVertical: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+  nameButtonText: {
+    fontFamily: FONTS.comfortaaSemiBold,
+    color: "white",
+  },
 
-    image: {
-        height: '90%',
-        marginBottom: 10,
-        aspectRatio: 1 / 1,
-        borderRadius: 500
-    }
-})
+  profileImageContainer: {
+    height: "65%",
+    width: "100%",
+    marginVertical: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  image: {
+    height: "90%",
+    marginBottom: 10,
+    aspectRatio: 1 / 1,
+    borderRadius: 500,
+  },
+
+  imageIcon: {
+    padding: 10,
+    backgroundColor: COLORS.lightGray,
+    borderRadius: 50,
+    position: 'relative',
+    top: -40
+  },
+
+  logOutText: {
+    color: COLORS.lightGray,
+    fontFamily: FONTS.comfortaaSemiBold,
+    position: 'relative',
+    top: -15
+  }
+});

@@ -8,25 +8,8 @@ const Stack = createNativeStackNavigator();
 
 const DashboardNavigator = () => {
   return (
-    <Stack.Navigator
-      initialRouteName="Dashboard"
-      screenOptions={{
-        headerTittle: 'TuYoga.Es',
-        headerStyle: {
-          backgroundColor: COLORS.lightGreen,
-        },
-        headerTitleAlign: 'center',
-        headerTintColor: "black",
-        headerTitleStyle: {
-          fontFamily: FONTS.comfortaaSemiBold,
-          fontWeight: "bold",
-          fontSize: 25,
-          color: COLORS.darkGreen
-        },
-        
-      }}
-    >
-      <Stack.Screen name="Dashboard" component={DashboardScreen} options={{title: 'TuYoga.Es'}}/>
+    <Stack.Navigator initialRouteName="Dashboard" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Dashboard" component={DashboardScreen}/>
     </Stack.Navigator>
   );
 };

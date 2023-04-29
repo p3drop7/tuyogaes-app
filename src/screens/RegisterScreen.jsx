@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { signUp } from "../store/actions/auth.actions";
 import FONTS from "../constants/Fonts";
 import COLORS from "../constants/Colors";
+import ShadowBox from "../wrappers/ShadowBox";
 
 const RegisterScreen = ({navigation}) => {
 
@@ -18,7 +19,7 @@ const RegisterScreen = ({navigation}) => {
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.mainContainer}>
-      <View style={styles.container}>
+      <ShadowBox style={styles.container}>
         <Image
           source={require("../../assets/images/anahata.png")}
           style={styles.image}
@@ -61,7 +62,7 @@ const RegisterScreen = ({navigation}) => {
             <Text style={styles.signInButton}>Inciar sesión</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ShadowBox>
     </KeyboardAvoidingView>
   );
 };
@@ -81,15 +82,16 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: COLORS.darkGreen,
     borderColor: 'black',
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: COLORS.lightGray,
-    backgroundColor: 'white'
+    borderRadius: 20
   },
 
   title: {
-    color: COLORS.darkGreen,
+    color: COLORS.lightGreen,
     fontFamily: FONTS.comfortaaBold,
     fontSize: 23,
   },
@@ -97,6 +99,7 @@ const styles = StyleSheet.create({
   title2: {
     fontFamily: FONTS.comfortaaBold,
     fontSize: 20,
+    color: 'white'
   },
 
   image: {
@@ -117,25 +120,27 @@ const styles = StyleSheet.create({
     height: 40,
     marginBottom: 15,
     borderBottomWidth: 2,
-    borderBottomColor: COLORS.lightGray
+    borderBottomColor: COLORS.lightGreen
   },
 
   formText: {
-    fontFamily: FONTS.comfortaaBold
+    fontFamily: FONTS.comfortaaBold,
+    color: 'white'
   },
 
   registerButton: {
     width: '100%',
     marginVertical: 10,
     paddingVertical: 5,
-    backgroundColor: COLORS.darkGreen
+    backgroundColor: COLORS.lightGreen,
+    borderRadius: 20
   },
 
   registerButtonText: {
-    color: 'white',
     fontFamily: FONTS.comfortaaSemiBold,
     fontSize: 18,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: COLORS.darkGreen
   },
 
   signInContainer: {
@@ -154,6 +159,6 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     fontFamily: FONTS.comfortaaBold,
     fontSize: 17,
-    color: COLORS.darkGreen
+    color: COLORS.lightGreen
   }
 });

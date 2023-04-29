@@ -69,77 +69,82 @@ const LogInScreen = ({navigation}) => {
 export default LogInScreen
 
 const styles = StyleSheet.create({
-    mainContainer: {
-        height: Dimensions.get('window').height,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+  mainContainer: {
+    height: Dimensions.get("window").height,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLORS.darkGreen,
+  },
 
-    container: {
-        width: '90%',
-        paddingVertical: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: COLORS.lightGreen
-    },
+  container: {
+    width: "90%",
+    paddingVertical: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLORS.lightGreen,
+  },
 
-    image: {
-        height: 50,
-        aspectRatio: 1 / 1,
-    },
-    
-    title: {
-        color: COLORS.darkGreen,
-        fontFamily: FONTS.comfortaaBold,
-        fontSize: 23,
-    },
+  image: {
+    height: 50,
+    aspectRatio: 1 / 1,
+  },
 
-    formContainer: {
-        width: '90%',
-        height: 190,
-        marginVertical: 10,
-        justifyContent: 'space-evenly',
-        alignItems: 'flex-start',
-      },
-    
-      formInput: {
-        width: '100%',
-        height: 40,
-        marginBottom: 15,
-        borderBottomWidth: 2,
-        borderBottomColor: COLORS.lightGray
-      },
-    
-      formText: {
-        fontFamily: FONTS.comfortaaBold
-      },
-    
-      registerButton: {
-        width: '100%',
-        marginVertical: 10,
-        paddingVertical: 5,
-        backgroundColor: COLORS.darkGreen
-      },
-    
-      registerButtonText: {
-        color: 'white',
-        fontFamily: FONTS.comfortaaSemiBold,
-        fontSize: 18,
-        textAlign: 'center'
-      },
+  title: {
+    color: COLORS.darkGreen,
+    fontFamily: FONTS.comfortaaBold,
+    fontSize: 23,
+  },
 
-    goBackContainer: {
-        alignItems: 'center'
-    },
+  formContainer: {
+    width: "90%",
+    height: 190,
+    marginVertical: 10,
+    justifyContent: "space-evenly",
+    alignItems: "flex-start",
+  },
 
-    goBackText: {
-        fontFamily: FONTS.comfortaaLight,
-        fontSize: 16
-    },
+  formInput: {
+    width: "100%",
+    height: 40,
+    marginBottom: 15,
+    borderBottomWidth: 2,
+    borderBottomColor: COLORS.darkGreen,
+  },
 
-    goBackButton: {
-        fontSize: 16,
-        fontFamily: FONTS.comfortaaBold,
-        paddingTop: 10
-    }
-})
+  formText: {
+    fontFamily: FONTS.comfortaaBold,
+    color: COLORS.darkGreen
+  },
+
+  registerButton: {
+    width: "100%",
+    marginVertical: 10,
+    paddingVertical: 5,
+    backgroundColor: COLORS.darkGreen,
+    borderRadius: 20,
+  },
+
+  registerButtonText: {
+    color: "white",
+    fontFamily: FONTS.comfortaaSemiBold,
+    fontSize: 18,
+    textAlign: "center",
+  },
+
+  goBackContainer: {
+    alignItems: "center",
+  },
+
+  goBackText: {
+    fontFamily: FONTS.comfortaaLight,
+    fontSize: 16,
+    color: COLORS.darkGray
+  },
+
+  goBackButton: {
+    fontSize: 16,
+    fontFamily: FONTS.comfortaaBold,
+    paddingTop: 10,
+    color: COLORS.darkGreen
+  },
+});

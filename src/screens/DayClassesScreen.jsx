@@ -2,6 +2,7 @@ import { StyleSheet, View, Dimensions } from 'react-native'
 import React from 'react'
 import ProfileDisplay from '../components/ProfileDisplay/ProfileDisplay'
 import DayClasses from '../components/DayClasses/Index'
+import COLORS from '../constants/Colors'
 
 // Screen to show classes on a selected day from calendar on MonthClasses screen
 const DayClassesScreen = ({route, navigation}) => {
@@ -20,5 +21,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: Dimensions.get('screen').width,
     height: Dimensions.get('screen').height,
+    backgroundColor: 'white'
   }
 })

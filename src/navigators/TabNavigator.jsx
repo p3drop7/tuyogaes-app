@@ -29,7 +29,7 @@ const TabNavigator = () => {
               <Feather
                 name="check-circle"
                 size={22}
-                color={focused ? "blue" : "black"}
+                color={focused ? "green" : "black"}
               />
               <Text>Mis Clases</Text>
             </View>
@@ -46,7 +46,7 @@ const TabNavigator = () => {
               <Ionicons
                 name="add-circle-outline"
                 size={26}
-                color={focused ? "blue" : "black"}
+                color={focused ? "green" : "black"}
               />
               <Text>Agregar Clases</Text>
             </View>
@@ -63,7 +63,7 @@ const TabNavigator = () => {
               <MaterialCommunityIcons
                 name="account"
                 size={26}
-                color={focused ? "blue" : "black"}
+                color={focused ? "green" : "black"}
               />
               <Text>Mi Perfil</Text>
             </View>

@@ -3,6 +3,7 @@ import { API_URL, LOG_IN_URL, SIGN_UP_URL } from "../../constants/data"
 
 export const SIGN_UP = 'SIGN_UP'
 export const LOG_IN = 'LOG_IN'
+export const LOG_OUT = 'LOG_OUT'
 
 // User's name
 export const SAVE_NAME = 'SAVE_NAME'
@@ -162,3 +163,7 @@ export const loadUserData = (userId) =>{
         }
     }
 }
+
+export const logOut =()=> ({
+    type: LOG_OUT
+})
