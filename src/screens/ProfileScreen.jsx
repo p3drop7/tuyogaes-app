@@ -20,7 +20,7 @@ const ProfileScreen = () => {
         const { status } = await ImagePicker.requestCameraPermissionsAsync()
 
         if( status !== 'granted') {
-            Alert.alert('Permisos insuficientes')
+            Alert.alert('Insufficient permissions')
             return false
         }
         return true
@@ -61,7 +61,7 @@ const ProfileScreen = () => {
             }}
           >
             {inputCondRender === false ? (
-              !userData.userName ? (
+              !userData.userName || userData.userName === 'NONE' ? (
                 <>
                   <Text style={styles.profileText}>Agrega tu nombre aquí</Text>
                   <Feather style={styles.nameIcon} name="edit-2" size={18} color="white" />
@@ -79,6 +79,8 @@ const ProfileScreen = () => {
                   onChangeText={setInputUserName}
                   keyboardType="default"
                   autoCapitalize="words"
+                  selectionColor={COLORS.darkGreen}
+                  textAlign='center'
                 />
                 <Pressable
                   style={styles.nameButton}
@@ -179,24 +181,26 @@ const styles = StyleSheet.create({
   },
 
   nameInput: {
-    width: 130,
+    width: 150,
     height: 32,
+    paddingHorizontal: 8,
     marginRight: 10,
     backgroundColor: COLORS.lightGreen,
-    borderBottomColor: COLORS.lightGray,
-    borderBottomWidth: 2,
+    fontFamily: FONTS.comfortaaSemiBold,
+    fontSize: 15
   },
 
   nameButton: {
     paddingHorizontal: 12,
     paddingVertical: 8,
-    backgroundColor: COLORS.darkGreen,
+    backgroundColor: COLORS.lightGreen,
     borderRadius: 10,
   },
 
   nameButtonText: {
-    fontFamily: FONTS.comfortaaSemiBold,
-    color: "white",
+    fontFamily: FONTS.comfortaaBold,
+    color: COLORS.darkGreen,
+    fontSize: 14
   },
 
   profileImageContainer: {

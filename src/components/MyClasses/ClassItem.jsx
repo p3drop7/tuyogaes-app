@@ -11,14 +11,11 @@ const ClassItem = ({ itemData, onHandlerModal }) => {
     <ShadowBox style={styles.itemContainer}>
       <View style={styles.itemDescription}>
         <Image
-          source={require("../../../assets/images/anahata.png")}
+          source={require("../../../assets/images/anahatalight.png")}
           style={styles.itemImage}
         />
         <View>
-          <Text style={styles.itemText}>
-            {itemData.item.monthName} {itemData.item.day} - {itemData.item.time}
-            hrs
-          </Text>
+          <Text style={styles.itemText}>{itemData.item.day} {itemData.item.monthName} - {itemData.item.time}hrs</Text>
         </View>
       </View>
 

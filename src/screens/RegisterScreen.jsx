@@ -21,7 +21,7 @@ const RegisterScreen = ({navigation}) => {
     <KeyboardAvoidingView behavior="padding" style={styles.mainContainer}>
       <ShadowBox style={styles.container}>
         <Image
-          source={require("../../assets/images/anahata.png")}
+          source={require("../../assets/images/logolight.png")}
           style={styles.image}
         />
         <Text style={styles.title}>TuYoga.es</Text>
@@ -34,6 +34,7 @@ const RegisterScreen = ({navigation}) => {
             onChangeText={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
+            selectionColor={COLORS.lightGreen}
           />
 
           <Text style={styles.formText}>Contraseña</Text>
@@ -42,6 +43,7 @@ const RegisterScreen = ({navigation}) => {
             onChangeText={setPassword}
             secureTextEntry
             autoCapitalize="none"
+            selectionColor={COLORS.lightGreen}
           />
 
           <TouchableOpacity
@@ -118,9 +120,12 @@ const styles = StyleSheet.create({
   formInput: {
     width: '100%',
     height: 40,
+    paddingHorizontal: 5,
     marginBottom: 15,
     borderBottomWidth: 2,
-    borderBottomColor: COLORS.lightGreen
+    borderBottomColor: COLORS.lightGreen,
+    fontFamily: FONTS.comfortaaBold,
+    fontSize: 15
   },
 
   formText: {

@@ -34,16 +34,30 @@ export const signUp = (email, password) => {
 
             const data = await response.json()
 
-            if( !response.ok ){
-                throw new Error('¡Ocurrió un error inesperado!')
-            }
+            if(!response.ok){
+                if(data.error.message === "EMAIL_EXISTS"){
+                    throw new Error('¡El email ya está registrado!')
+                }
 
+                if(data.error.message === "INVALID_EMAIL"){
+                    throw new Error('¡Por favor, introduzca un email válido!')
+                }
+
+                if(data.error.message === "WEAK_PASSWORD : Password should be at least 6 characters"){
+                    throw new Error('¡La contraseña debe tener al menos 6 caracteres!')
+                }
+
+                if(data.error.message === "MISSING_PASSWORD"){
+                    throw new Error('¡Por favor introduzca una contraseña!')
+                }
+            }
+        
             dispatch({
                 type: SIGN_UP,
                 payload: {
                     token: data.idToken,
                     userId: data.localId,
-                    userEmail: data.email
+                    userEmail: data.email,
                 }
                 
             })
@@ -74,6 +88,25 @@ export const logIn = (email, password) => {
             })
 
             const data = await response.json()
+
+            console.log('DATA', data)
+            if(!response.ok){
+                if(data.error.message === "INVALID_EMAIL"){
+                    throw new Error('¡Por favor, introduzca un email válido!')
+                }
+
+                if(data.error.message === "MISSING_PASSWORD"){
+                    throw new Error('¡Por favor, introduzca la contraseña!')
+                }
+
+                if(data.error.message === "INVALID_PASSWORD" || data.error.message === "EMAIL_NOT_FOUND"){
+                    throw new Error('¡El email o la contraseña no son correctos!')
+                }
+
+                if(data.error.message === "TOO_MANY_ATTEMPTS_TRY_LATER : Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."){
+                    throw new Error('¡Muchos intentos de inicio de sesión incorrectos! La cuenta ha sido bloqueada temporalmente.')
+                }
+            }
             
             dispatch({
                 type: LOG_IN,
@@ -85,7 +118,7 @@ export const logIn = (email, password) => {
             })
 
         } catch (error){
-            console.log(error)
+            alert(error)
         }
     }
 }

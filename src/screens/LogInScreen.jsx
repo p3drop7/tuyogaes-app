@@ -14,7 +14,7 @@ const LogInScreen = ({navigation}) => {
     const [password, setPassword] = React.useState('')
 
     const onHandleLogIn =()=>{
-        dispatch( logIn( email, password ))
+      dispatch( logIn( email, password ))
     }
     
   return (
@@ -22,7 +22,7 @@ const LogInScreen = ({navigation}) => {
       <ShadowBox style={styles.container}>
 
         <Image
-          source={require("../../assets/images/anahata.png")}
+          source={require("../../assets/images/logo.png")}
           style={styles.image}
         />
         <Text style={styles.title}>TuYoga.es</Text>
@@ -34,6 +34,7 @@ const LogInScreen = ({navigation}) => {
             onChangeText={setEmail}
             keyboardType='email-address'
             autoCapitalize='none'
+            cursorColor={COLORS.darkGreen}
           />
           
           <Text style={styles.formText}>Contraseña</Text>
@@ -42,6 +43,7 @@ const LogInScreen = ({navigation}) => {
             onChangeText={setPassword}
             secureTextEntry
             autoCapitalize="none"
+            cursorColor={COLORS.darkGreen}
           />
 
           <TouchableOpacity 
@@ -109,6 +111,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderBottomWidth: 2,
     borderBottomColor: COLORS.darkGreen,
+    fontFamily: FONTS.comfortaaSemiBold,
+    fontSize: 15
   },
 
   formText: {

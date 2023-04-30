@@ -1,4 +1,4 @@
-import { LOG_IN, SIGN_UP, TAKE_IMAGE, LOAD_IMAGE, SAVE_NAME, LOAD_USERDATA, LOG_OUT } from "../actions/auth.actions"
+import { LOG_IN, SIGN_UP, TAKE_IMAGE, SAVE_NAME, LOAD_USERDATA, LOG_OUT } from "../actions/auth.actions"
 
 const initialState = {
     token: null,
@@ -17,7 +17,7 @@ const AuthReducer = ( state = initialState, action) => {
           token: action.payload.token,
           userId: action.payload.userId,
           userEmail: action.payload.userEmail,
-          userName: null
+          userName: 'NONE'
         };
 
       case LOG_IN:

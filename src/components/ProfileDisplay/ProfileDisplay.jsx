@@ -2,26 +2,32 @@ import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import COLORS from '../../constants/Colors'
 import FONTS from '../../constants/Fonts';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveUserData } from '../../store/actions/auth.actions';
 
 // User's profile display
 const ProfileDisplay = () => {
 
   const userData = useSelector(state => state.auth )
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch( saveUserData(userData) )
+  })
 
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <View style={styles.titleContainer}>
           <Image
-            source={require("../../../assets/images/anahata.png")}
+            source={require("../../../assets/images/logolight.png")}
             style={styles.image}
           />
-          <Text style={styles.title}>TuYoga.Es</Text>
+          <Text style={styles.title}>TuYoga.es</Text>
         </View>
 
         {
-          !userData.userName
+          !userData.userName || userData.userName === 'NONE'
             ? <Text style={styles.noName}>Agrega tu nombre en "Mi Perfil"</Text>
             : <Text style={styles.name}>{userData.userName}</Text>
         }
