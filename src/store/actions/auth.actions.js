@@ -89,7 +89,6 @@ export const logIn = (email, password) => {
 
             const data = await response.json()
 
-            console.log('DATA', data)
             if(!response.ok){
                 if(data.error.message === "INVALID_EMAIL"){
                     throw new Error('¡Por favor, introduzca un email válido!')
