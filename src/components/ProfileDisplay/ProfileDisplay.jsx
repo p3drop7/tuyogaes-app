@@ -11,10 +11,6 @@ const ProfileDisplay = () => {
   const userData = useSelector(state => state.auth )
   const dispatch = useDispatch()
 
-  React.useEffect(() => {
-    dispatch( saveUserData(userData) )
-  })
-
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>

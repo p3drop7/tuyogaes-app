@@ -23,6 +23,7 @@ export const deleteClass = (selectedClass) => ({
 
 // Function to load the classes from Firebase
 export const loadFirebase = (userId) => {
+
   return async (dispatch) => {
     try {
       const response = await fetch(API_URL + "myClasses/" + userId + ".json", {
@@ -40,7 +41,7 @@ export const loadFirebase = (userId) => {
             classesInFB: [],
           });
 
-      } else if ( result.classes === null || result.classes === undefined ) {
+      } else if ( !result.classes ) {
           dispatch({
               type: LOAD_FIREBASE,
               classesInFB: [],
@@ -61,8 +62,16 @@ export const loadFirebase = (userId) => {
 
 // Funtion to modify classes to Firebase
 export const updateFirebase = (myClasses, userEmail, userId) => {
-  
+
     return async dispatch => {
+        if(myClasses.length === 0){
+          dispatch({
+          type: UPDATE_FIREBASE,
+          classesInFB: [],
+        })
+
+
+      }else{
         try {
           const response = await fetch(
             API_URL + "myClasses/" + userId + ".json", {
@@ -98,4 +107,5 @@ export const updateFirebase = (myClasses, userEmail, userId) => {
           console.error(error);
         }
     }
+  }
 }

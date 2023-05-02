@@ -44,20 +44,16 @@ const MyClasses = () => {
     setModalVisible(!modalVisible);
   };
 
-  // When the App is loaded and the component is rendered, loadFirebase() calls and brings user's classes by its userId
+  // Load user's data and classes from Firebase when component is rendered
   React.useEffect(() => {
     dispatch( loadFirebase(userId) )
-  }, [])
+    dispatch( loadUserData(userId) )
+  }, [userId])
 
   // Update user's classes in Firebase when myClasses list state changes
   React.useEffect(() => {
     dispatch( updateFirebase(myClasses, userEmail, userId) )
   }, [myClasses])
-
-  // Load user's data from Firebase when component is rendered
-  React.useEffect(() => {
-    dispatch( loadUserData(userId) )
-  }, [])
   
   return (
     <>
@@ -65,7 +61,7 @@ const MyClasses = () => {
 
       <View style={styles.container}>
 
-        { myClasses === null || myClasses.length === 0 ? (
+        { myClasses === null || myClasses.length === 0 || !myClasses ? (
           <Text style={styles.emptyList}>Aún no has agregado clases</Text>
 
         ) : (
