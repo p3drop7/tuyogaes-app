@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/anahata.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.pedropalencia7.tuyogaes"
     },
     "web": {
       "favicon": "./assets/favicon.png"
