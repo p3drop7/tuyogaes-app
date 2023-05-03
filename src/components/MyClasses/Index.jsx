@@ -35,12 +35,13 @@ const MyClasses = () => {
     let currentItem = myClasses.filter((item) => item.key === key)[0];
     dispatch( selectClass(currentItem) )
     setItemSelected(currentItem);
-    setModalVisible(!modalVisible);
+    setModalVisible(!modalVisible) 
   };
 
   // Funtion to delete item from state.myClasses in pop-up modal
   const deleteItem = () => {
     dispatch( deleteClass(selectedClass) )
+    // dispatch( updateFirebase(myClasses, userEmail, userId) )
     setModalVisible(!modalVisible);
   };
 
@@ -60,9 +61,9 @@ const MyClasses = () => {
       <Text style={styles.title}>Mis próximas clases</Text>
 
       <View style={styles.container}>
-
-        { myClasses === null || myClasses.length === 0 || !myClasses ? (
-          <Text style={styles.emptyList}>Aún no has agregado clases</Text>
+        {myClasses === null || myClasses.length === 0 || !myClasses 
+        
+        ? ( <Text style={styles.emptyList}>Aún no has agregado clases</Text>
 
         ) : (
           <View style={styles.listContainer}>
@@ -82,7 +83,6 @@ const MyClasses = () => {
             />
           </View>
         )}
-
       </View>
 
       <DeleteModal

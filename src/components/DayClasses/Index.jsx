@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import FONTS from "../../constants/Fonts";
 import DayClassItem from "./DayClassItem";
 import AddModal from "./AddModal";
-import { addClass , selectClass } from "../../store/actions/myClasses.actions";
+import { addClass , selectClass, updateFirebase } from "../../store/actions/myClasses.actions";
 import COLORS from "../../constants/Colors";
 
 const DayClasses = ({navigation, route}) => {

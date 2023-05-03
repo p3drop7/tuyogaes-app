@@ -1,4 +1,4 @@
-import { ADD_CLASS, DELETE_CLASS, LOAD_FIREBASE, SELECT_CLASS, UPDATE_FIREBASE } from '../actions/myClasses.actions'
+import { ADD_CLASS, CLEAN_CLASSES, DELETE_CLASS, LOAD_FIREBASE, SELECT_CLASS, UPDATE_FIREBASE } from '../actions/myClasses.actions'
 
 const initialState = {
     myClasses: [],
@@ -54,6 +54,13 @@ const MyClassesReducer = ( state = initialState, action) => {
         case UPDATE_FIREBASE:
             return {
                 ...state,
+            }
+
+        // Set classes to [] when logging out
+        case CLEAN_CLASSES:
+            return {
+                ...state,
+                myClasses: []
             }
 
         default:

@@ -5,6 +5,7 @@ export const SELECT_CLASS = 'SELECT_CLASS'
 export const DELETE_CLASS = 'DELETE_CLASS'
 export const LOAD_FIREBASE = 'LOAD_FIREBASE'
 export const UPDATE_FIREBASE = 'UPDATE_FIREBASE'
+export const CLEAN_CLASSES = 'CLEAN_CLASSES'
 
 export const addClass = (selectedClass) => ({
     type: ADD_CLASS,
@@ -64,14 +65,6 @@ export const loadFirebase = (userId) => {
 export const updateFirebase = (myClasses, userEmail, userId) => {
 
     return async dispatch => {
-        if(myClasses.length === 0){
-          dispatch({
-          type: UPDATE_FIREBASE,
-          classesInFB: [],
-        })
-
-
-      }else{
         try {
           const response = await fetch(
             API_URL + "myClasses/" + userId + ".json", {
@@ -87,25 +80,16 @@ export const updateFirebase = (myClasses, userEmail, userId) => {
             }
           );
 
-          const result = await response.json();
-
-         
-          if( result.classes === null || result.classes === undefined ) {
-            dispatch({
-              type: UPDATE_FIREBASE,
-              classesInFB: [],
-            })
-          
-          } else {
-            dispatch({
-              type: UPDATE_FIREBASE,
-              classesInFB: result.classes
-            });
-          }
+          // const result = await response.json();
 
         } catch (error) {
           console.error(error);
         }
     }
-  }
+  // }
 }
+
+//Function to clean classes perssistance when logging out
+export const cleanClasses = () => ({
+  type: CLEAN_CLASSES
+})

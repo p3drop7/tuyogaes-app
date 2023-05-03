@@ -2,14 +2,12 @@ import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import COLORS from '../../constants/Colors'
 import FONTS from '../../constants/Fonts';
-import { useDispatch, useSelector } from 'react-redux';
-import { saveUserData } from '../../store/actions/auth.actions';
+import { useSelector } from 'react-redux';
 
 // User's profile display
 const ProfileDisplay = () => {
 
   const userData = useSelector(state => state.auth )
-  const dispatch = useDispatch()
 
   return (
     <View style={styles.container}>

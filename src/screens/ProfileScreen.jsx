@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logOut, saveName, saveUserData, takeImage } from '../store/actions/auth.actions'
 import FONTS from '../constants/Fonts';
 import COLORS from '../constants/Colors';
+import { cleanClasses } from '../store/actions/myClasses.actions';
 
 const ProfileScreen = () => {
 
     const dispatch = useDispatch()
 
     const userData = useSelector(state => state.auth)
+    const myClasses = useSelector(state => state.myClasses)
 
     const [inputCondRender, setInputCondRender] = React.useState(false)
     const [inputUserName, setInputUserName] = React.useState('')
@@ -40,7 +42,11 @@ const ProfileScreen = () => {
     }
 
     const logOutHandler =()=> {
-      dispatch( logOut() )
+      dispatch(logOut())
+
+      setTimeout(()=>{
+        dispatch( cleanClasses() )
+      }, 2000)
     }
 
     React.useEffect(() => {
